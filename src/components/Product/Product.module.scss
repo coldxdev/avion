@@ -3,38 +3,48 @@
 @import "../../assets/scss/common.scss";
 
 
-.product{
+.product {
   display: flex;
   flex-direction: column;
 }
 
-.img{
+.img {
   position: relative;
   height: 0;
   width: 100%;
   padding-bottom: 123%;
   margin-bottom: 24px;
+  overflow: hidden;
 
-  & .big{
-    padding-bottom: 59.5%;
-  }
-
-  & img{
+  & img {
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
     object-fit: cover;
+    transition: transform ease .5s;
+  }
+
+  &:hover img {
+    transform: scale(1.2);
+  }
+
+  &.big {
+    padding-bottom: 59.524%;
+
+    @media (max-width: em(600)) {
+      padding-bottom: 123%;
+    }
   }
 }
 
-.name{
-  @extend  %h4;
+.name {
+  @extend %h4;
   flex: 1 1 auto;
   margin-bottom: 8px;
 }
 
-.price{
+.price {
   @extend %lgText;
 }

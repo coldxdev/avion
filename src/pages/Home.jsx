@@ -1,6 +1,6 @@
 import React from 'react';
-import {Benefits, ProductList, ProductSlider, TopBanner} from "../components";
-import {productsList} from "../utils/mockup";
+import {Benefits, ProductList, ProductSlider, TopBanner, EmailForm} from "../components";
+import {productsList, productsSlider} from "../utils/mockup";
 
 const Home = () => {
     return (
@@ -8,10 +8,14 @@ const Home = () => {
             <TopBanner/>
             <Benefits/>
             <ProductList
-                products={productsList}
                 title={'New ceramics'}
+                products={productsList}
             />
-            <ProductSlider />
+            <ProductSlider
+                title={'Our popular products'}
+                products={productsSlider}
+            />
+            <EmailForm/>
         </>
     );
 };

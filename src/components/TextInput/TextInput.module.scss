@@ -23,6 +23,16 @@
   }
 }
 
+.light{
+  background-color: var(--lightGrey);
+
+  &::placeholder{
+    color: var(--darkPrimary);
+
+    opacity: 0.2;
+  }
+}
+
 .btn{
   @media (max-width: 420px) {
     padding: 16px;

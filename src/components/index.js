@@ -7,3 +7,4 @@ export {default as Benefits} from "./Benefits/Benefits";
 export {default as Product} from "./Product/Product";
 export {default as ProductList} from "./ProductList/ProductList";
 export {default as ProductSlider} from "./ProductSlider/ProductSlider";
+export {default as EmailForm} from "./EmailForm/EmailForm";

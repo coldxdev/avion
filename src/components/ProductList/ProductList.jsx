@@ -10,7 +10,7 @@ const ProductList = ({title, products}) => {
             price={p.price}
             href={p.href}
             isBig={p.isBig}
-            key={p.name}
+            key={p.id}
         />
     ))
 
