@@ -1,0 +1,39 @@
+.bar {
+  color: var(--white);
+  background-color: var(--darkPrimary);
+  padding: 10px 55px 10px 15px;
+  position: relative;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.text {
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.btn {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  line-height: 0;
+}
+
+.btn svg{
+  fill: var(--white);
+}
+
+.deliveryIcon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  fill: var(--white);
+}

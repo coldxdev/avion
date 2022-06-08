@@ -1,0 +1,45 @@
+@import "../../assets/scss/vars.scss";
+@import "../../assets/scss/common.scss";
+
+.productList {
+  padding: 60px 0;
+
+  @media (max-width: $mobile) {
+    padding: 0 0 60px;
+  }
+}
+
+.title {
+  @extend %h2;
+  margin-bottom: 25px;
+}
+
+.grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+
+  &:not(:last-child) {
+    margin-bottom: 35px;
+  }
+
+  @media (max-width: $mobile) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: em(560)) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: em(380)) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  @media (max-width: $mobileSmall) {
+    gap: 20px 16px;
+  }
+}
+
+.btn {
+  text-align: center;
+}

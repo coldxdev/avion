@@ -1,0 +1,81 @@
+@import "../../assets/scss/vars";
+@import "../../assets/scss/common";
+
+.topBanner {
+  padding: 60px 0;
+
+  @media (max-width: $mobile) {
+    padding: 0 0 60px;
+  }
+}
+
+.wrapper {
+  display: flex;
+
+  @media (max-width: $mobile) {
+    margin: 0 -25px;
+  }
+}
+
+.content {
+  color: var(--white);
+  background-color: var(--darkPrimary);
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 35px;
+
+  @media (max-width: $tablet) {
+    width: 100%;
+  }
+
+  @media (max-width: $mobile) {
+    padding: 40px 25px;
+
+  }
+
+}
+
+.img {
+
+  @media (max-width: $tablet) {
+    display: none;
+  }
+
+  img {
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.btn {
+
+  @media (max-width: $tablet) {
+    order: 2;
+  }
+
+  @media (max-width: $mobileSmall) {
+    width: 100%;
+  }
+}
+
+.top {
+  flex: 1 1 auto;
+}
+
+.title {
+  max-width: 500px;
+  @extend %h2;
+}
+
+.text {
+  display: flex;
+  align-items: flex-end;
+  max-width: 600px;
+  height: 100%;
+  @extend %lgText;
+
+
+}

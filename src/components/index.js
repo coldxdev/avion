@@ -1,0 +1,9 @@
+export {default as Button} from "./Button/Button";
+export {default as Header} from "./Header/Header";
+export {default as Bar} from "./Bar/Bar";
+export {default as TopBanner} from "./TopBanner/TopBanner";
+export {default as Footer} from "./Footer/Footer";
+export {default as Benefits} from "./Benefits/Benefits";
+export {default as Product} from "./Product/Product";
+export {default as ProductList} from "./ProductList/ProductList";
+export {default as ProductSlider} from "./ProductSlider/ProductSlider";

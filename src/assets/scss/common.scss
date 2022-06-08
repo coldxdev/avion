@@ -1,0 +1,65 @@
+@import "mixins";
+
+%title {
+  font-family: $secondFont;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+%h1 {
+  @extend %title;
+  font-size: rem(36);
+}
+
+%h2 {
+  @extend %title;
+  font-size: rem(32);
+
+
+  @media (max-width: $mobileSmall) {
+    font-size: rem(28);
+  }
+}
+
+%h3 {
+  @extend %title;
+  font-size: rem(24);
+}
+
+%h4 {
+  @extend %title;
+  font-size: rem(20);
+}
+
+%h5 {
+  @extend %title;
+  font-size: rem(16);
+}
+
+%h6 {
+  @extend %title;
+  font-size: rem(14);
+}
+
+%text {
+  line-height: 1.5;
+}
+
+%smText {
+  font-size: rem(14);
+  @extend %text
+}
+
+%mdText {
+  font-size: rem(16);
+  @extend %text
+}
+
+%lgText {
+  font-size: rem(18);
+  @extend %text
+}
+
+.input {
+
+}

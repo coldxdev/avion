@@ -1,0 +1,30 @@
+.textInput{
+  display: flex;
+  
+  @media (max-width: 380px) {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+.input{
+  flex: 1 1 auto;
+  min-height: 60px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 17px 32px;
+  color: var(--white);
+
+  &::placeholder{
+    color: var(--white);
+  }
+
+  @media (max-width: 600px) {
+    padding: 17px;
+  }
+}
+
+.btn{
+  @media (max-width: 420px) {
+    padding: 16px;
+  }
+}
