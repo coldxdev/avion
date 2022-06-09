@@ -10,25 +10,20 @@ export const routes = [
     {
         path: HOME_ROUTE,
         Component: Home,
-        exact: true,
     },
     {
         path: ABOUT_ROUTE,
         Component: About,
-        exact: true,
     },
     {
         path: PRODUCT_ROUTE,
         Component: ProductPage,
-        exact: true,
     },
     {
         path: PRODUCTS_ROUTE,
         Component: Products,
-        exact: true,
     },
     {
         path: CART_ROUTE,
         Component: Cart,
-        exact: true,
     }]
