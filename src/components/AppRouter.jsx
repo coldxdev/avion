@@ -6,9 +6,10 @@ import {HOME_ROUTE} from "../utils/consts";
 const AppRouter = () => {
     return (
         <Routes>
-            {routes.map(({path, Component}) =>
+            {routes.map(({path, Component, exact}) =>
                 <Route path={path}
                        element={<Component/>}
+                       exact={exact}
                        key={path}
                 />
             )}
