@@ -1,10 +1,10 @@
 import React from 'react';
 import s from "./ProductList.module.scss"
-import {Button, Product} from "../index";
+import {Button, ProductCard} from "../index";
 
 const ProductList = ({title, products}) => {
     const productElems = products.map((p) => (
-        <Product
+        <ProductCard
             imgSrc={p.imgSrc}
             name={p.name}
             price={p.price}

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Benefits, ProductList, ProductSlider, TopBanner, EmailForm} from "../components";
+import {Benefits, ProductList, ProductSlider, TopBanner, EmailForm, Features} from "../components";
 import {productsList, productsSlider} from "../utils/mockup";
 
 const Home = () => {
@@ -16,6 +16,7 @@ const Home = () => {
                 products={productsSlider}
             />
             <EmailForm/>
+            <Features/>
         </>
     );
 };

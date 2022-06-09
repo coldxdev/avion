@@ -3,6 +3,8 @@ import {SearchIcon, CartIcon, UserIcon, MenuIcon, CloseIcon} from "../../assets/
 import HeaderCategories from "./HeaderCatagories/HeaderCategories";
 import {useState} from "react";
 import cn from "classnames";
+import {Link} from "react-router-dom";
+import {HOME_ROUTE} from "../../utils/consts";
 
 const Header = (props) => {
     const [menuActive, setMenuActive] = useState(false);
@@ -14,7 +16,7 @@ const Header = (props) => {
     return (
         <header>
             <div className={`container ${s.header}`}>
-                <a className={s.logo} href={"#"}>Avion</a>
+                <Link className={s.logo} to={HOME_ROUTE}>Avion</Link>
                 <div className={s.wrapper}>
                     <nav className={s.menu}>
                         <ul className={cn(s.menuList, s.mobileMenu, {[s.mobileMenuActive]: menuActive})}>

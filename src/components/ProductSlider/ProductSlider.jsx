@@ -4,13 +4,13 @@ import 'swiper/css';
 import PropTypes from "prop-types";
 import cn from "classnames"
 import s from "./ProductSlider.module.scss"
-import {Button, Product} from "../index";
+import {Button, ProductCard} from "../index";
 import {Autoplay} from "swiper";
 
 const ProductSlider = ({products, title}) => {
     const sliderElems = products.map(p => (
         <SwiperSlide className={cn(s.slide, {[s.bigSlide]: p.isBig})} key={p.id}>
-            <Product {...p}  />
+            <ProductCard {...p}  />
         </SwiperSlide>
     ))
 

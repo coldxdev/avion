@@ -1,50 +1,124 @@
-@import "../../assets/scss/vars.scss";
-@import "../../assets/scss/mixins.scss";
-@import "../../assets/scss/common.scss";
-
+@import "../../assets/scss/vars";
+@import "../../assets/scss/common";
 
 .product {
-  display: flex;
-  flex-direction: column;
+  padding: 60px 0;
+  background: var(--lightGrey);
+
+  @media (max-width: $mobile) {
+    padding: 0 0 60px;
+  }
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 47.5% 1fr;
+  gap: 65px;
+
+  @media (max-width: $mobile) {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
 }
 
 .img {
   position: relative;
-  height: 0;
-  width: 100%;
-  padding-bottom: 123%;
-  margin-bottom: 24px;
+  padding-bottom: 112.19%;
   overflow: hidden;
-
-  & img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    object-fit: cover;
-    transition: transform ease .5s;
-  }
+  height: 0;
 
   &:hover img {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
+}
 
-  &.big {
-    padding-bottom: 59.524%;
+.img img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform ease .5s;
+}
 
-    @media (max-width: em(600)) {
-      padding-bottom: 123%;
-    }
-  }
+.top {
+  padding-bottom: 30px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid var(--borderGrey);
 }
 
 .name {
-  @extend %h4;
-  flex: 1 1 auto;
-  margin-bottom: 8px;
+  @extend %h1;
+  margin-bottom: 15px;
 }
 
 .price {
-  @extend %lgText;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.desc {
+  margin-bottom: 35px;
+}
+
+.descTitle {
+  @extend %h5;
+  margin-bottom: 15px;
+}
+
+.desc p:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.dimensions {
+  margin-bottom: 40px;
+}
+
+.dimensionsTitle {
+  @extend %h5;
+  margin-bottom: 25px;
+}
+
+.dimensionsTable {
+  display: flex;
+  gap: 100px;
+
+  @media (max-width: $tablet) {
+    gap: 50px;
+  }
+}
+
+.dimensionsName {
+  @extend %h6;
+  margin-bottom: 15px;
+}
+
+.counter {
+  margin-bottom: 50px;
+}
+
+.counterTitle {
+  @extend %h5;
+  margin-bottom: 12px;
+}
+
+.actions {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+
+
+}
+
+.actionsBtn {
+  @media(max-width: $tablet) {
+    width: 100%;
+  }
+
+  @media (max-width: $mobile) {
+    &:first-child {
+      order: 1;
+    }
+  }
 }

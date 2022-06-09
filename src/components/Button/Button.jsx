@@ -3,7 +3,7 @@ import s from './Button.module.scss';
 import {ArrowDownIcon} from '../../assets/images/icons';
 import cn from "classnames";
 
-const Button = ({size, withArrow, type, className, ...props}) => {
+const Button = ({size, withArrow, type = 'white', className, ...props}) => {
     return (
         <button
             className={cn(s.btn, {

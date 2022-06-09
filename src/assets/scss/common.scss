@@ -9,6 +9,10 @@
 %h1 {
   @extend %title;
   font-size: rem(36);
+
+  @media (max-width: $mobileSmall) {
+    font-size: rem(34);
+  }
 }
 
 %h2 {
