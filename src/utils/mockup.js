@@ -87,3 +87,20 @@ export const product = {
         depth: 50,
     },
 }
+
+export const cartItems = [
+    {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-1.jpg',
+        name: 'Graystone vase',
+        desc: 'A timeless ceramic vase with a tri color grey glaze.',
+        price: '£85',
+        id: 1,
+    },
+    {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-2.jpg',
+        name: 'Basic white vase',
+        desc: 'Beautiful and simple this is one for the classics',
+        price: '£285',
+        id: 2,
+    }
+]

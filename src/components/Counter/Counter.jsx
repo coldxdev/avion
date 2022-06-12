@@ -5,14 +5,24 @@ const Counter = () => {
     const [value, setValue] = useState(1);
 
     const decrementValue = () => {
-        if (value < 1) return;
+        if (value < 2) {
+            return
+        }
         setValue(value - 1);
     }
     const incrementValue = () => {
         setValue(value + 1);
     }
 
-    const onChange = (e) => setValue(Number(e.target.value));
+    const onChange = (e) => {
+        const value = Number(e.target.value);
+        console.log(value)
+        if (value < 1) {
+            setValue(1);
+            return;
+        }
+        setValue(value)
+    };
 
     return (
         <div className={s.counter}>

@@ -1,6 +1,5 @@
 import './App.scss';
-import AppRouter from "./components/AppRouter";
-import {Bar, Footer, Header} from "./components";
+import {Bar, Footer, Header, AppRouter, ScrollToTop} from "./components";
 
 function App() {
     return (
@@ -8,6 +7,7 @@ function App() {
             <Bar/>
             <Header/>
             <main>
+                <ScrollToTop/>
                 <AppRouter/>
             </main>
             <Footer/>

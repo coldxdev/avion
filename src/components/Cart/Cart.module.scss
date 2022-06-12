@@ -1,0 +1,146 @@
+@import "../../assets/scss/vars";
+@import "../../assets/scss/common";
+
+.cart {
+  padding: 60px 0 50px;
+  background-color: var(--lightGrey);
+
+  @media (max-width: $mobile) {
+    padding: 45px 0;
+  }
+}
+
+.title {
+  @extend %h1;
+  margin-bottom: 45px;
+
+  @media (max-width: $mobile) {
+    font-size: rem(24);
+  }
+}
+
+.table {
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid var(--borderGrey);
+}
+
+.tableHeader {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--borderGrey);
+  margin-bottom: 20px;
+
+  @media (max-width: $mobile) {
+    display: none;
+  }
+}
+
+.tableTitle {
+  @extend %h6;
+}
+
+.tableProduct {
+  flex: 0 1 310px;
+
+  @media (max-width: 570px) {
+    flex: unset;
+  }
+}
+
+.tableQuantity {
+  flex: 0 0 150px;
+
+  @media (max-width: $mobile) {
+    flex: unset;
+  }
+}
+
+.tablePrice {
+  flex: 0 0 80px;
+
+  @media (max-width: $mobile) {
+    display: none;
+  }
+}
+
+.cartItems {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.cartItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+
+  @media (max-width: 570px) {
+    flex-direction: column;
+  }
+}
+
+.cartItemWrapper {
+  display: grid;
+  grid-template-columns: 1fr 180px;
+  align-items: center;
+  gap: 20px;
+
+  @media (max-width: 570px) {
+    grid-template-columns: 30% 1fr;
+  }
+}
+
+.cartItemImg {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 122.93%;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.cartItemName {
+  @extend %h4;
+  margin-bottom: 8px;
+}
+
+.cartItemDesc {
+  @extend %smText;
+  margin-bottom: 8px;
+}
+
+
+.total {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  row-gap: 15px;
+}
+
+.totalPrice {
+  @extend %title;
+  font-size: rem(20);
+  color: var(--primary);
+
+  span {
+    display: inline-block;
+    margin-left: 15px;
+    font-size: rem(24);
+    color: var(--darkPrimary);
+  }
+}
+
+.totalText {
+  @extend %smText;
+  color: var(--primary);
+  text-align: right;
+}

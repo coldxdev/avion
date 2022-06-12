@@ -1,10 +1,9 @@
 import {ABOUT_ROUTE, CART_ROUTE, HOME_ROUTE, PRODUCT_ROUTE, PRODUCTS_ROUTE} from "./consts";
 import About from "../pages/About";
 import Home from "../pages/Home";
-import Product from "../pages/ProductPage";
 import Products from "../pages/Products";
-import Cart from "../pages/Cart";
 import ProductPage from "../pages/ProductPage";
+import CartPage from "../pages/CartPage";
 
 export const routes = [
     {
@@ -25,5 +24,5 @@ export const routes = [
     },
     {
         path: CART_ROUTE,
-        Component: Cart,
+        Component: CartPage,
     }]

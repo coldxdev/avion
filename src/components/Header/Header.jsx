@@ -4,7 +4,7 @@ import HeaderCategories from "./HeaderCatagories/HeaderCategories";
 import {useState} from "react";
 import cn from "classnames";
 import {Link} from "react-router-dom";
-import {HOME_ROUTE} from "../../utils/consts";
+import {CART_ROUTE, HOME_ROUTE} from "../../utils/consts";
 
 const Header = (props) => {
     const [menuActive, setMenuActive] = useState(false);
@@ -35,9 +35,9 @@ const Header = (props) => {
                         <button className={s.search}>
                             <SearchIcon/>
                         </button>
-                        <a href="#" className={s.cart}>
+                        <Link to={CART_ROUTE} className={s.cart}>
                             <CartIcon/>
-                        </a>
+                        </Link>
                         <a href="#" className={s.user}>
                             <UserIcon/>
                         </a>

@@ -11,3 +11,6 @@ export {default as EmailForm} from "./EmailForm/EmailForm";
 export {default as Features} from "./Features/Features";
 export {default as Product} from "./Product/Product";
 export {default as Counter} from "./Counter/Counter";
+export {default as AppRouter} from "./AppRouter";
+export {default as ScrollToTop} from "./ScrollToTop";
+export {default as Cart} from "./Cart/Cart";

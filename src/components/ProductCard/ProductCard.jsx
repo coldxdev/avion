@@ -2,18 +2,19 @@ import React from 'react';
 import s from "./ProductCard.module.scss";
 import PropTypes from "prop-types";
 import cn from "classnames";
+import {Link} from "react-router-dom";
 
 const ProductCard = ({imgSrc, href, name, price, isBig}) => {
 
     return (
         <article className={s.product}>
-            <a
+            <Link
                 className={cn(s.img, {
                     [s.big]: isBig
                 })}
-                href={href}>
+                to={href}>
                 <img src={imgSrc} alt={`Image ${name}`}/>
-            </a>
+            </Link>
 
             <h5 className={s.name}> {name} </h5>
 
