@@ -42,10 +42,6 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (max-width: em(380)) {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
   @media (max-width: $mobileSmall) {
     gap: 20px 16px;
   }
