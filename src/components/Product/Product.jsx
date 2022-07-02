@@ -46,7 +46,7 @@ const Product = ({product}) => {
                     </div>
 
                     <div className={s.actions}>
-                        <Button  className={s.actionsBtn} type={'primary'}>Add to cart</Button>
+                        <Button className={s.actionsBtn} tag={'link'} to={'/'}  type={'primary'}>Add to cart</Button>
                         <Button className={s.actionsBtn} >Save to favorites</Button>
                     </div>
 

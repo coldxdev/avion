@@ -1,3 +1,7 @@
+@import "./assets/scss/mixins.scss";
+@import "./assets/scss/vars.scss";
+@import "./assets/scss/common.scss";
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -14,3 +18,19 @@
   padding: 0 25px;
   margin: 0 auto;
 }
+
+.productListings {
+  display: grid;
+  grid-template-columns: 305px 1fr;
+  gap: 20px;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  @media (max-width: $pc) {
+    grid-template-columns: 200px 1fr;
+  }
+  @media (max-width: $mobile) {
+    grid-template-columns: 1fr;
+    padding-top: 15px;
+  }
+}
+

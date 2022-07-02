@@ -1,13 +1,12 @@
 import s from "./Header.module.scss";
-import {SearchIcon, CartIcon, UserIcon, MenuIcon, CloseIcon} from "../../assets/images/icons/";
-import HeaderCategories from "./HeaderCatagories/HeaderCategories";
-import {useState} from "react";
 import cn from "classnames";
 import {Link} from "react-router-dom";
-import {CART_ROUTE, HOME_ROUTE} from "../../utils/consts";
+import PropTypes from "prop-types";
+import HeaderCategories from "./HeaderCatagories/HeaderCategories";
+import {SearchIcon, CartIcon, UserIcon, MenuIcon, CloseIcon} from "../../assets/images/icons/";
+import {CART_ROUTE, HOME_ROUTE, PRODUCTS_LISTINGS_ROUTE} from "../../utils/consts";
 
-const Header = (props) => {
-    const [menuActive, setMenuActive] = useState(false);
+const Header = ({menuActive, setMenuActive}) => {
 
     const handleMenuBtn = () => {
         setMenuActive(!menuActive)
@@ -24,7 +23,7 @@ const Header = (props) => {
                                 <a className={s.menuLink} href="#">About us</a>
                             </li>
                             <li className={s.menuItem}>
-                                <a className={s.menuLink} href="#">Contact</a>
+                                <Link className={s.menuLink} to={PRODUCTS_LISTINGS_ROUTE}>All products</Link>
                             </li>
                             <li className={s.menuItem}>
                                 <a className={s.menuLink} href="#">Blog</a>
@@ -57,6 +56,9 @@ const Header = (props) => {
     );
 };
 
-Header.propTypes = {};
+Header.propTypes = {
+    menuActive: PropTypes.bool,
+    setMenuActive: PropTypes.func,
+};
 
 export default Header;

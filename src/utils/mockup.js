@@ -75,7 +75,6 @@ export const productsSlider = [
     },
 
 ]
-
 export const product = {
     imgSrc: 'https://coldxdev.github.io/images/products/product-1.jpg',
     name: 'The Dandy Chair',
@@ -87,7 +86,6 @@ export const product = {
         depth: 50,
     },
 }
-
 export const cartItems = [
     {
         imgSrc: 'https://coldxdev.github.io/images/products/product-1.jpg',
@@ -102,5 +100,170 @@ export const cartItems = [
         desc: 'Beautiful and simple this is one for the classics',
         price: '£285',
         id: 2,
-    }
+    }, {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-1.jpg',
+        name: 'Graystone vase',
+        desc: 'A timeless ceramic vase with a tri color grey glaze.',
+        price: '£85',
+        id: 3,
+    },
+    {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-2.jpg',
+        name: 'Basic white vase',
+        desc: 'Beautiful and simple this is one for the classics',
+        price: '£285',
+        id: 4,
+    }, {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-1.jpg',
+        name: 'Graystone vase',
+        desc: 'A timeless ceramic vase with a tri color grey glaze.',
+        price: '£85',
+        id: 5,
+    },
+    {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-2.jpg',
+        name: 'Basic white vase',
+        desc: 'Beautiful and simple this is one for the classics',
+        price: '£285',
+        id: 6,
+    }, {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-1.jpg',
+        name: 'Graystone vase',
+        desc: 'A timeless ceramic vase with a tri color grey glaze.',
+        price: '£85',
+        id: 7,
+    },
+    {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-2.jpg',
+        name: 'Basic white vase',
+        desc: 'Beautiful and simple this is one for the classics',
+        price: '£285',
+        id: 8,
+    }, {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-1.jpg',
+        name: 'Graystone vase',
+        desc: 'A timeless ceramic vase with a tri color grey glaze.',
+        price: '£85',
+        id: 9,
+    },
+    {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-2.jpg',
+        name: 'Basic white vase',
+        desc: 'Beautiful and simple this is one for the classics',
+        price: '£285',
+        id: 10,
+    }, {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-1.jpg',
+        name: 'Graystone vase',
+        desc: 'A timeless ceramic vase with a tri color grey glaze.',
+        price: '£85',
+        id: 11,
+    },
+    {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-2.jpg',
+        name: 'Basic white vase',
+        desc: 'Beautiful and simple this is one for the classics',
+        price: '£285',
+        id: 12,
+    }, {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-1.jpg',
+        name: 'Graystone vase',
+        desc: 'A timeless ceramic vase with a tri color grey glaze.',
+        price: '£85',
+        id: 13,
+    },
+    {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-2.jpg',
+        name: 'Basic white vase',
+        desc: 'Beautiful and simple this is one for the classics',
+        price: '£285',
+        id: 14,
+    }, {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-1.jpg',
+        name: 'Graystone vase',
+        desc: 'A timeless ceramic vase with a tri color grey glaze.',
+        price: '£85',
+        id: 15,
+    },
+    {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-2.jpg',
+        name: 'Basic white vase',
+        desc: 'Beautiful and simple this is one for the classics',
+        price: '£285',
+        id: 16,
+    },
+]
+export const productsListings = [
+    {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-1.jpg',
+        name: 'The Dandy chair',
+        price: '£250',
+        href: '/product/1',
+        isBig: false,
+        id: 1
+    },
+    {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-2.jpg',
+        name: 'Rustic Vase Set',
+        price: '£155',
+        href: '/product/2',
+        isBig: false,
+        id: 2
+    },
+    {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-3.jpg',
+        name: 'The Silky Vase',
+        price: '£125',
+        href: '/product/3',
+        isBig: false,
+        id: 3
+    },
+    {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-4.jpg',
+        name: 'The Lucy Lamp',
+        price: '£399',
+        href: '/product/4',
+        isBig: false,
+        id: 4
+    },
+    {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-2.jpg',
+        name: 'Rustic Vase Set',
+        price: '£155',
+        href: '/product/2',
+        isBig: false,
+        id: 5
+    },
+    {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-3.jpg',
+        name: 'The Silky Vase',
+        price: '£125',
+        href: '/product/3',
+        isBig: false,
+        id: 6
+    },
+    {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-4.jpg',
+        name: 'The Lucy Lamp',
+        price: '£399',
+        href: '/product/4',
+        isBig: false,
+        id: 7
+    },
+    {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-2.jpg',
+        name: 'Rustic Vase Set',
+        price: '£155',
+        href: '/product/2',
+        isBig: false,
+        id: 8
+    },
+    {
+        imgSrc: 'https://coldxdev.github.io/images/products/product-3.jpg',
+        name: 'The Silky Vase',
+        price: '£125',
+        href: '/product/3',
+        isBig: false,
+        id: 9
+    },
 ]

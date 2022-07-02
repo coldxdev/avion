@@ -6,7 +6,7 @@
   background-color: var(--lightGrey);
 
   @media (max-width: $mobile) {
-    padding: 45px 0;
+    padding: 25px 0 40px;
   }
 }
 
@@ -68,7 +68,24 @@
 .cartItems {
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
+  overflow-y: scroll;
+  padding-right: 8px;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--borderGrey);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--darkPrimary);
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 }
 
 .cartItem {

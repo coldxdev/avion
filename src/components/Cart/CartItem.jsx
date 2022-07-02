@@ -1,10 +1,33 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import s from "./Cart.module.scss";
 import {Counter} from "../index";
 
-const CartItem = ({imgSrc, name, desc, price}) => {
+const CartItem = ({imgSrc, name, desc, price, setHeight}) => {
+    const cartItemRef = useRef(null);
+
+    let throttled = false;
+    const handleToResize = () => {
+        if (!throttled) {
+            setHeight(cartItemRef.current.clientHeight);
+            throttled = true;
+            setTimeout(() => {
+                throttled = false
+            }, 200)
+        }
+    }
+
+
+    useEffect(() => {
+        setHeight(cartItemRef.current.clientHeight);
+        window.addEventListener('resize', handleToResize)
+
+        return () => {
+            window.removeEventListener('resize', handleToResize)
+        }
+    }, [])
+
     return (
-        <div className={s.cartItem}>
+        <div className={s.cartItem} ref={cartItemRef}>
             <div className={s.tableProduct}>
                 <div className={s.cartItemWrapper}>
                     <div className={s.cartItemImg}>

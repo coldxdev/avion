@@ -14,3 +14,5 @@ export {default as Counter} from "./Counter/Counter";
 export {default as AppRouter} from "./AppRouter";
 export {default as ScrollToTop} from "./ScrollToTop";
 export {default as Cart} from "./Cart/Cart";
+export {default as ProductsAside} from "./ProductsAside/ProductsAside";
+export {default as Checkbox} from "./Checkbox/Checkbox";

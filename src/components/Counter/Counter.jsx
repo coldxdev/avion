@@ -16,7 +16,7 @@ const Counter = () => {
 
     const onChange = (e) => {
         const value = Number(e.target.value);
-        console.log(value)
+
         if (value < 1) {
             setValue(1);
             return;

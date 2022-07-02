@@ -1,10 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from './Cart.module.scss'
 import CartItem from "./CartItem";
 import {Button} from "../index";
+import {SPACE_BETWEEN_CART_ITEMS} from "../../utils/consts";
+import {getMaxHeightCartItem} from "../../utils/functions";
 
 const Cart = ({cartItems}) => {
-    const cartItemElems = cartItems.map(item => <CartItem key={item.id} {...item} />)
+    const [cartItemHeight, setCartItemHeight] = useState(0);
+    const cartItemElems = cartItems.map(item => (
+            <CartItem
+                key={item.id}
+                setHeight={setCartItemHeight}
+                {...item} />
+        )
+    );
 
     return (
         <div className={s.cart}>
@@ -30,7 +39,10 @@ const Cart = ({cartItems}) => {
                             </h5>
                         </div>
                     </div>
-                    <div className={s.cartItems}>
+                    <div className={s.cartItems} style={{
+                        rowGap: SPACE_BETWEEN_CART_ITEMS + 'px',
+                        maxHeight: getMaxHeightCartItem(cartItemHeight),
+                    }}>
                         {cartItemElems}
                     </div>
                 </div>
