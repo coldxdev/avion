@@ -6,11 +6,22 @@ import cn from "classnames"
 import s from "./ProductSlider.module.scss"
 import {Button, ProductCard} from "../index";
 import {Autoplay} from "swiper";
+import {ATTRIBUTE_IS_BIG} from "../../utils/consts";
+import {getProductAttribute} from "../../utils/functions";
 
 const ProductSlider = ({products, title}) => {
     const sliderElems = products.map(p => (
-        <SwiperSlide className={cn(s.slide, {[s.bigSlide]: p.isBig})} key={p.id}>
-            <ProductCard {...p}  />
+        <SwiperSlide
+            className={cn(s.slide,
+                {[s.bigSlide]: getProductAttribute(p, ATTRIBUTE_IS_BIG).value === 'yes'}
+            )}
+            key={p.id}>
+            <ProductCard imgSrc={p.image.url}
+                         name={p.name}
+                         price={p.price.formatted_with_symbol}
+                         href={p.permalink}
+                         isBig={getProductAttribute(p, ATTRIBUTE_IS_BIG).value === 'yes'}
+                         key={p.id}/>
         </SwiperSlide>
     ))
 
@@ -22,7 +33,6 @@ const ProductSlider = ({products, title}) => {
                     modules={[Autoplay]}
                     className={s.slider}
                     spaceBetween={20}
-                    autoplay={true}
                     slidesPerView={'auto'}
                 >
                     {sliderElems}

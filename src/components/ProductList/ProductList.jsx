@@ -11,16 +11,17 @@ const ProductList = (props) => {
         btnText = "View collection",
         itemsPerRow = "4",
         withoutPadding,
-        withoutContainer
+        withoutContainer,
+        onClickBtn,
+        hasNextPage
     } = props;
 
     const productElems = products.map((p) => (
         <ProductCard
-            imgSrc={p.imgSrc}
+            imgSrc={p.image?.url}
             name={p.name}
-            price={p.price}
-            href={p.href}
-            isBig={p.isBig}
+            price={p.price.formatted_with_symbol}
+            href={p.permalink}
             key={p.id}
         />
     ))
@@ -42,9 +43,9 @@ const ProductList = (props) => {
                     {productElems}
                 </div>
                 <div className={s.btn}>
-                    <Button type={'secondary'}>
+                    {hasNextPage && <Button onClick={onClickBtn} type={'secondary'}>
                         {btnText}
-                    </Button>
+                    </Button>}
                 </div>
             </div>
         </div>
@@ -58,6 +59,7 @@ ProductList.propTypes = {
     itemsPerRow: PropTypes.oneOf(["3", "4"]),
     withoutPadding: PropTypes.bool,
     withoutContainer: PropTypes.bool,
+    hasNextPage: PropTypes.bool,
 }
 
 export default ProductList;

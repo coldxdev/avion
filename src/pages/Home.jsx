@@ -1,19 +1,26 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Benefits, ProductList, ProductSlider, TopBanner, EmailForm, Features} from "../components";
-import {productsList, productsSlider} from "../utils/mockup";
+import {useDispatch, useSelector} from "react-redux";
+import {NEW_PRODUCTS_CATEGORY, POPULAR_PRODUCTS_CATEGORY} from "../utils/consts";
+import {filterProductsByCategories} from "../utils/functions";
 
 const Home = () => {
+    const products = useSelector(state => state.home.products);
+
+    const newProducts = filterProductsByCategories(products, NEW_PRODUCTS_CATEGORY).slice(0, 4)
+    const popularProducts = filterProductsByCategories(products, POPULAR_PRODUCTS_CATEGORY).reverse();
+
     return (
         <>
             <TopBanner/>
             <Benefits/>
             <ProductList
                 title={'New ceramics'}
-                products={productsList}
+                products={newProducts}
             />
             <ProductSlider
                 title={'Our popular products'}
-                products={productsSlider}
+                products={popularProducts}
             />
             <EmailForm/>
             <Features/>

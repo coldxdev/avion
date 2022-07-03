@@ -3,6 +3,7 @@ import s from "./ProductCard.module.scss";
 import PropTypes from "prop-types";
 import cn from "classnames";
 import {Link} from "react-router-dom";
+import ProductMockupImg from "../../assets/images/product-image-mockup.jpg";
 
 const ProductCard = ({imgSrc, href, name, price, isBig}) => {
 
@@ -13,7 +14,7 @@ const ProductCard = ({imgSrc, href, name, price, isBig}) => {
                     [s.big]: isBig
                 })}
                 to={href}>
-                <img src={imgSrc} alt={`Image ${name}`}/>
+                <img src={imgSrc ? imgSrc : ProductMockupImg} alt={`Image ${name}`} loading={'lazy'}/>
             </Link>
 
             <h5 className={s.name}> {name} </h5>
