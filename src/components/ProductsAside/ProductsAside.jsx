@@ -4,20 +4,8 @@ import {Button, Checkbox} from "../index";
 import {CloseIcon} from "../../assets/images/icons";
 import cn from "classnames";
 
-const ProductsAside = () => {
-    const [checkboxState, setCheckboxState] = useState({
-        furniture: false,
-        homeware: false,
-        sofas: false,
-        lightFittings: false,
-    })
+const ProductsAside = ({checkboxesState, onChangeCheckbox, ...props}) => {
     const [filtersVisibility, setFiltersVisibility] = useState(false);
-
-    const {furniture, homeware, sofas, lightFittings} = checkboxState;
-
-    const onChangeCheckbox = (e) => {
-        setCheckboxState({...checkboxState, [e.target.name]: e.target.checked})
-    }
 
     const onMobileBtnClick = () => {
         setFiltersVisibility(true);
@@ -26,6 +14,7 @@ const ProductsAside = () => {
     const onCloseBtnClick = () => {
         setFiltersVisibility(false);
     }
+
 
     return (
         <div className={s.aside}>
@@ -52,7 +41,7 @@ const ProductsAside = () => {
                     <Checkbox
                         className={s.checkbox}
                         title={"Furniture"}
-                        value={furniture}
+                        isChecked={checkboxesState["furniture"].checked}
                         name={'furniture'}
                         onChange={onChangeCheckbox}
                     />
@@ -61,21 +50,21 @@ const ProductsAside = () => {
                         title={"Homeware"}
                         name={'homeware'}
                         onChange={onChangeCheckbox}
-                        value={homeware}
+                        isChecked={checkboxesState["homeware"].checked}
                     />
                     <Checkbox
                         className={s.checkbox}
                         title={"Sofas"}
                         name={'sofas'}
                         onChange={onChangeCheckbox}
-                        value={sofas}
+                        isChecked={checkboxesState["sofas"].checked}
                     />
                     <Checkbox
                         className={s.checkbox}
                         title={"Light fittings"}
-                        name={'lightFittings'}
                         onChange={onChangeCheckbox}
-                        value={lightFittings}
+                        name={'light-fittings'}
+                        isChecked={checkboxesState["light-fittings"].checked}
                     />
 
                 </div>
@@ -87,14 +76,24 @@ const ProductsAside = () => {
                     <Checkbox
                         className={s.checkbox}
                         title={"0 - 100"}
+                        name={"0-100"}
+                        isChecked={checkboxesState["0-100"].checked}
+                        onChange={onChangeCheckbox}
                     />
+
                     <Checkbox
                         className={s.checkbox}
                         title={"101 - 250"}
+                        name={"101-250"}
+                        isChecked={checkboxesState["101-250"].checked}
+                        onChange={onChangeCheckbox}
                     />
                     <Checkbox
                         className={s.checkbox}
-                        title={"250 +"}
+                        title={"250+"}
+                        name={"250+"}
+                        isChecked={checkboxesState["250+"].checked}
+                        onChange={onChangeCheckbox}
                     />
 
                 </div>
@@ -106,18 +105,30 @@ const ProductsAside = () => {
                     <Checkbox
                         className={s.checkbox}
                         title={"Robert Smith"}
+                        name={"robert-smith"}
+                        isChecked={checkboxesState["robert-smith"].checked}
+                        onChange={onChangeCheckbox}
                     />
                     <Checkbox
                         className={s.checkbox}
                         title={"Liam Gallagher"}
+                        name={"liam-gallagher"}
+                        isChecked={checkboxesState["liam-gallagher"].checked}
+                        onChange={onChangeCheckbox}
                     />
                     <Checkbox
                         className={s.checkbox}
                         title={"Biggie Smalls"}
+                        name={"biggie-smalls"}
+                        isChecked={checkboxesState["biggie-smalls"].checked}
+                        onChange={onChangeCheckbox}
                     />
                     <Checkbox
                         className={s.checkbox}
                         title={"Thom Yorke"}
+                        name={"thom-yorke"}
+                        isChecked={checkboxesState["thom-yorke"].checked}
+                        onChange={onChangeCheckbox}
                     />
                 </div>
             </div>

@@ -1,7 +1,6 @@
 import {setIsLoading} from "./pageReducer";
 import {commerce} from "../../lib/commerce";
 
-const FETCH_PRODUCTS = "FETCH_PRODUCTS";
 const UPDATE_PRODUCTS = "UPDATE_PRODUCTS"
 
 const initialState = {

@@ -1,14 +1,6 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
-import pageReducer from "./reducers/pageReducer";
-import homeReducer from "./reducers/homeReducer";
+import {applyMiddleware, createStore} from "redux";
 import thunk from "redux-thunk";
-import productListingsReducer from "./reducers/productListingsReducer";
-
-const reducers = combineReducers({
-    app: pageReducer,
-    home: homeReducer,
-    productsListings: productListingsReducer,
-})
+import reducers from "./reducers";
 
 const store = createStore(reducers, applyMiddleware(thunk));
 

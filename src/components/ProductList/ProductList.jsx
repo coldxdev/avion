@@ -36,17 +36,24 @@ const ProductList = (props) => {
                         {title}
                     </h2>
                 }
-                <div className={cn(s.grid, {
-                    [s.threeItemsPerRow]: itemsPerRow === "3",
-                    [s.fourItemsPerRow]: itemsPerRow === "4",
-                })}>
-                    {productElems}
-                </div>
-                <div className={s.btn}>
-                    {hasNextPage && <Button onClick={onClickBtn} type={'secondary'}>
-                        {btnText}
-                    </Button>}
-                </div>
+                {products.length > 0
+                    ? <>
+                        <div className={cn(s.grid, {
+                            [s.threeItemsPerRow]: itemsPerRow === "3",
+                            [s.fourItemsPerRow]: itemsPerRow === "4",
+                        })}>
+                            {productElems}
+                        </div>
+                        <div className={s.btn}>
+                            {hasNextPage && <Button onClick={onClickBtn} type={'secondary'}>
+                                {btnText}
+                            </Button>}
+                        </div>
+                    </>
+                    : <p className={s.notFoundText}>
+                        Not found products
+                    </p>
+                }
             </div>
         </div>
     );

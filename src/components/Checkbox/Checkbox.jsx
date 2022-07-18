@@ -3,12 +3,12 @@ import s from "./Checkbox.module.scss";
 import PropTypes from "prop-types";
 import cn from "classnames";
 
-const Checkbox = ({className, title, value, onChange, ...props}) => {
+const Checkbox = ({className, title, isChecked, onChange, ...props}) => {
     return (
         <label className={cn(s.label, {
-            [s.checked]: value,
+            [s.checked]: isChecked,
         }, className)}>
-            <input className={'sr-only'} onChange={onChange} value={value} checked={value} type="checkbox" {...props} />
+            <input className={'sr-only'} onChange={onChange} checked={isChecked} type="checkbox" {...props} />
             <span>{title}</span>
         </label>
     );
