@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "./EmailForm.module.scss"
-import TextInput from "../TextInput/TextInput";
+import TextInput from "../ui/TextInput/TextInput";
 
 const EmailForm = () => {
     return (

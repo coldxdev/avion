@@ -8,11 +8,16 @@
   color: var(--darkPrimary);
   padding: 12px 20px;
   border: 1px solid var(--white);
-  transition: border-color ease .3s;
+  transition: border-color ease .3s, opacity ease .3s;
 
   &:focus {
     border-color: var(--darkPrimary);
     outline: none;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
   }
 }
 

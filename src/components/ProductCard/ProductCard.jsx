@@ -5,8 +5,12 @@ import cn from "classnames";
 import {Link} from "react-router-dom";
 import ProductMockupImg from "../../assets/images/product-image-mockup.jpg";
 import {Button} from "../index";
+import {CartIcon, SuccessIcon} from "../../assets/images/icons";
 
-const ProductCard = ({imgSrc, href, name, price, isBig}) => {
+// TODO: Сделать внутри кнопки лоадер после добавления в корзину
+// TODO: Проверять находиться ли элемент в корзине и менять иконку в кнопке
+
+const ProductCard = ({imgSrc, href, name, price, isBig, onAdd, isAdded = false}) => {
     return (
         <article className={s.product}>
             <Link
@@ -17,13 +21,22 @@ const ProductCard = ({imgSrc, href, name, price, isBig}) => {
                 <img src={imgSrc ? imgSrc : ProductMockupImg} alt={`Image ${name}`} loading={'lazy'}/>
             </Link>
 
-            <h5 className={s.name}> {name} </h5>
 
-            <p className={s.price}> {price} </p>
+            <div className={s.wrapper}>
 
-            <Button type={'primary'}>
-                Buy
-            </Button>
+                <div className={s.text}>
+                    <h5 className={s.name}> {name} </h5>
+                    <p className={s.price}> {price} </p>
+                </div>
+
+
+                <Button className={s.btn} type={'primary'} onClick={onAdd}>
+                    {isAdded ? <SuccessIcon className={s.successIcon} /> : <CartIcon className={s.btnIcon}/>}
+                </Button>
+
+            </div>
+
+
         </article>
     );
 };

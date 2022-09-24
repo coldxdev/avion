@@ -1,55 +1,78 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from "./ProductList.module.scss"
 import {Button, ProductCard} from "../index";
 import PropTypes from "prop-types";
 import cn from "classnames";
+import {addToCart} from "../../redux/reducers/cartReducer";
+
+//TODO: сделать адекватное отоброжение карточек с большой картинкой
 
 const ProductList = (props) => {
     const {
         title,
         products,
-        btnText = "View collection",
+        btnText,
         itemsPerRow = "4",
         withoutPadding,
         withoutContainer,
         onClickBtn,
-        hasNextPage
+        hasNextPage = true,
+        href
     } = props;
 
-    const productElems = products.map((p) => (
-        <ProductCard
-            imgSrc={p.image?.url}
-            name={p.name}
-            price={p.price.formatted_with_symbol}
-            href={p.permalink}
-            key={p.id}
-        />
-    ))
+    const productElems = products.map((p) => {
+
+        const onAddToCart = () => (
+            addToCart(p.id)
+        )
+
+        return (
+            <ProductCard
+                imgSrc={p.image?.url}
+                name={p.name}
+                price={p.price.formatted_with_symbol}
+                href={p.permalink}
+                key={p.id}
+                onAdd={onAddToCart}
+            />
+        )
+    })
+
+    const buttonProps = href ? {tag: 'link', href} : null
 
     return (
         <div className={cn(s.productList, {
             [s.withoutPadding]: withoutPadding,
         })}>
-            <div className={withoutContainer ? null : 'container'}>
+            <div className={cn({'container': !withoutContainer})}>
                 {title &&
                     <h2 className={s.title}>
                         {title}
                     </h2>
                 }
-                {products.length > 0
-                    ? <>
+                {products.length
+                    ? <React.Fragment>
                         <div className={cn(s.grid, {
                             [s.threeItemsPerRow]: itemsPerRow === "3",
                             [s.fourItemsPerRow]: itemsPerRow === "4",
                         })}>
                             {productElems}
                         </div>
-                        <div className={s.btn}>
-                            {hasNextPage && <Button onClick={onClickBtn} type={'secondary'}>
-                                {btnText}
-                            </Button>}
-                        </div>
-                    </>
+                        {btnText && hasNextPage
+                            ? (
+                                <div className={s.btn}>
+                                    <Button
+                                        onClick={onClickBtn}
+                                        type={"secondary"}
+                                        {...buttonProps}
+                                    >
+                                        {btnText}
+                                    </Button>
+                                </div>
+                            )
+                            : null
+                        }
+                    </React.Fragment>
                     : <p className={s.notFoundText}>
                         Not found products
                     </p>
@@ -61,12 +84,14 @@ const ProductList = (props) => {
 
 ProductList.propTypes = {
     title: PropTypes.string,
-    products: PropTypes.arrayOf(PropTypes.object),
     btnText: PropTypes.string,
+    href: PropTypes.string,
+    products: PropTypes.arrayOf(PropTypes.object),
     itemsPerRow: PropTypes.oneOf(["3", "4"]),
     withoutPadding: PropTypes.bool,
     withoutContainer: PropTypes.bool,
     hasNextPage: PropTypes.bool,
+    onClickBtn: PropTypes.func,
 }
 
 export default ProductList;

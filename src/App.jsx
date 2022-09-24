@@ -3,6 +3,9 @@ import {Bar, Footer, Header, AppRouter, ScrollToTop, Loader} from "./components"
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchProducts} from "./redux/reducers/homeReducer";
+import {ToastContainer, Zoom} from 'react-toastify';
+
+//TODO: сделать типизацию PropTypes
 
 function App() {
     const [menuActive, setMenuActive] = useState(false);
@@ -13,16 +16,25 @@ function App() {
         dispatch(fetchProducts());
     }, []);
 
-    return (<div className='wrapper'>
-        {isLoading && <Loader/>}
-        <Bar/>
-        <Header menuActive={menuActive} setMenuActive={setMenuActive}/>
-        <main>
-            <ScrollToTop/>
-            <AppRouter/>
-        </main>
-        <Footer/>
-    </div>);
+    return (
+        <div className='wrapper'>
+            {isLoading && <Loader/>}
+            <Bar/>
+            <Header
+                menuActive={menuActive}
+                setMenuActive={setMenuActive}
+            />
+            <main>
+                <ScrollToTop/>
+                <AppRouter/>
+            </main>
+            <Footer/>
+            <ToastContainer
+                transition={Zoom}
+                autoClose={1000}
+            />
+        </div>
+    );
 }
 
 export default App;

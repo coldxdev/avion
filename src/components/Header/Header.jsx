@@ -8,6 +8,9 @@ import {CART_ROUTE, HOME_ROUTE, PRODUCTS_LISTINGS_ROUTE} from "../../utils/const
 
 const Header = ({menuActive, setMenuActive}) => {
 
+    // TODO: Переделать мобильное меню
+
+
     const handleMenuBtn = () => {
         setMenuActive(!menuActive)
     }
@@ -23,7 +26,7 @@ const Header = ({menuActive, setMenuActive}) => {
                                 <a className={s.menuLink} href="#">About us</a>
                             </li>
                             <li className={s.menuItem}>
-                                <Link className={s.menuLink} to={PRODUCTS_LISTINGS_ROUTE}>All products</Link>
+                                <Link className={s.menuLink} to={PRODUCTS_LISTINGS_ROUTE}>Products Listings</Link>
                             </li>
                             <li className={s.menuItem}>
                                 <a className={s.menuLink} href="#">Blog</a>

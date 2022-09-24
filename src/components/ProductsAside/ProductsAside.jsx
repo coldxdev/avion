@@ -44,6 +44,7 @@ const ProductsAside = ({checkboxesState, onChangeCheckbox, ...props}) => {
                         isChecked={checkboxesState["furniture"].checked}
                         name={'furniture'}
                         onChange={onChangeCheckbox}
+                        filterType={'categories'}
                     />
                     <Checkbox
                         className={s.checkbox}
@@ -51,6 +52,7 @@ const ProductsAside = ({checkboxesState, onChangeCheckbox, ...props}) => {
                         name={'homeware'}
                         onChange={onChangeCheckbox}
                         isChecked={checkboxesState["homeware"].checked}
+                        filterType={'categories'}
                     />
                     <Checkbox
                         className={s.checkbox}
@@ -58,6 +60,7 @@ const ProductsAside = ({checkboxesState, onChangeCheckbox, ...props}) => {
                         name={'sofas'}
                         onChange={onChangeCheckbox}
                         isChecked={checkboxesState["sofas"].checked}
+                        filterType={'categories'}
                     />
                     <Checkbox
                         className={s.checkbox}
@@ -65,6 +68,7 @@ const ProductsAside = ({checkboxesState, onChangeCheckbox, ...props}) => {
                         onChange={onChangeCheckbox}
                         name={'light-fittings'}
                         isChecked={checkboxesState["light-fittings"].checked}
+                        filterType={'categories'}
                     />
 
                 </div>
@@ -75,10 +79,11 @@ const ProductsAside = ({checkboxesState, onChangeCheckbox, ...props}) => {
 
                     <Checkbox
                         className={s.checkbox}
-                        title={"0 - 100"}
+                        title={"0-100"}
                         name={"0-100"}
                         isChecked={checkboxesState["0-100"].checked}
                         onChange={onChangeCheckbox}
+                        filterType={'prices'}
                     />
 
                     <Checkbox
@@ -87,6 +92,7 @@ const ProductsAside = ({checkboxesState, onChangeCheckbox, ...props}) => {
                         name={"101-250"}
                         isChecked={checkboxesState["101-250"].checked}
                         onChange={onChangeCheckbox}
+                        filterType={'prices'}
                     />
                     <Checkbox
                         className={s.checkbox}
@@ -94,6 +100,7 @@ const ProductsAside = ({checkboxesState, onChangeCheckbox, ...props}) => {
                         name={"250+"}
                         isChecked={checkboxesState["250+"].checked}
                         onChange={onChangeCheckbox}
+                        filterType={'prices'}
                     />
 
                 </div>
@@ -108,6 +115,7 @@ const ProductsAside = ({checkboxesState, onChangeCheckbox, ...props}) => {
                         name={"robert-smith"}
                         isChecked={checkboxesState["robert-smith"].checked}
                         onChange={onChangeCheckbox}
+                        filterType={'categories'}
                     />
                     <Checkbox
                         className={s.checkbox}
@@ -115,6 +123,7 @@ const ProductsAside = ({checkboxesState, onChangeCheckbox, ...props}) => {
                         name={"liam-gallagher"}
                         isChecked={checkboxesState["liam-gallagher"].checked}
                         onChange={onChangeCheckbox}
+                        filterType={'categories'}
                     />
                     <Checkbox
                         className={s.checkbox}
@@ -122,6 +131,7 @@ const ProductsAside = ({checkboxesState, onChangeCheckbox, ...props}) => {
                         name={"biggie-smalls"}
                         isChecked={checkboxesState["biggie-smalls"].checked}
                         onChange={onChangeCheckbox}
+                        filterType={'categories'}
                     />
                     <Checkbox
                         className={s.checkbox}
@@ -129,6 +139,7 @@ const ProductsAside = ({checkboxesState, onChangeCheckbox, ...props}) => {
                         name={"thom-yorke"}
                         isChecked={checkboxesState["thom-yorke"].checked}
                         onChange={onChangeCheckbox}
+                        filterType={'categories'}
                     />
                 </div>
             </div>

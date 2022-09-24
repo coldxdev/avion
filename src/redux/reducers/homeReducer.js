@@ -22,8 +22,8 @@ const homeReducer = (state = initialState, action) => {
 
 export const updateProducts = (products) => ({type: UPDATE_PRODUCTS, payload: products})
 
-export const fetchProducts = () => {
-    return async (dispatch, getStore) => {
+export const fetchProducts = () => (
+    async (dispatch, getStore) => {
         dispatch(setIsLoading(true));
         await commerce.products.list().then(({data: products}) => {
             dispatch(updateProducts(products))
@@ -32,6 +32,6 @@ export const fetchProducts = () => {
             console.log('There was an error fetching the products', error)
         });
     }
-}
+)
 
 export default homeReducer;

@@ -21,6 +21,7 @@
   }
 }
 
+
 .img {
   position: relative;
   padding-bottom: 112.19%;
@@ -40,6 +41,22 @@
   height: 100%;
   object-fit: cover;
   transition: transform ease .5s;
+}
+
+
+.isBig {
+  .wrapper {
+    grid-template-columns: 57.5% 1fr;
+
+    @media (max-width: $tablet) {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+  }
+
+  .img {
+    padding-bottom: 60%;
+  }
 }
 
 .top {

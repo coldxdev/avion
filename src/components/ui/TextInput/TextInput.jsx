@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import s from "./TextInput.module.scss"
-import {Button} from "../index";
+import {Button} from "../../index";
 import cn from "classnames";
 
 const TextInput = ({placeholder, type = 'dark', className, ...props}) => {

@@ -1,3 +1,6 @@
+import {commerce} from "../../lib/commerce";
+import {toast} from "react-toastify";
+
 const SET_IS_LOADING = "SET_IS_LOADING";
 
 const initialState = {
@@ -8,7 +11,6 @@ const pageReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_IS_LOADING:
             return {...state, isLoading: action.payload}
-
         default:
             return state
     }

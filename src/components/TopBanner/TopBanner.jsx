@@ -2,6 +2,7 @@ import React from 'react';
 import s from "./TopBanner.module.scss";
 import {Button} from "../index";
 import TopBannerImg from "../../assets/images/TopBannerImg.jpg";
+import {NEW_PRODUCTS_CATEGORY} from "../../utils/consts";
 
 const TopBanner = () => {
     return (
@@ -12,10 +13,10 @@ const TopBanner = () => {
                         The furniture brand for the future, with timeless designs
                     </h1>
 
-                    <Button className={s.btn} type={'opaque'}> View collection </Button>
+                    <Button className={s.btn} type={'opaque'} tag={'link'} href={`/collection/${NEW_PRODUCTS_CATEGORY}`}> View collection </Button>
 
                     <p className={s.text}>
-                        A new era in eco friendly furniture with Avelon, the French luxury retail
+                        A new era in eco friendly furniture with Avellone, the French luxury retail
                         brand
                         with nice fonts, tasteful colors and a beautiful way to display things digitally
                         using modern web technologies.</p>

@@ -9,7 +9,7 @@ import {
     SkypeIcon,
     TwitterIcon
 } from "../../assets/images/icons";
-import TextInput from "../TextInput/TextInput";
+import TextInput from "../ui/TextInput/TextInput";
 
 
 const Footer = () => {

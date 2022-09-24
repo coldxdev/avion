@@ -4,11 +4,13 @@
 .cart {
   padding: 60px 0 50px;
   background-color: var(--lightGrey);
+  position: relative;
 
   @media (max-width: $mobile) {
     padding: 25px 0 40px;
   }
 }
+
 
 .title {
   @extend %h1;
@@ -20,9 +22,10 @@
 }
 
 .table {
-  padding-bottom: 30px;
+  padding-bottom: 15px;
   margin-bottom: 30px;
   border-bottom: 1px solid var(--borderGrey);
+  position: relative;
 }
 
 .tableHeader {
@@ -68,8 +71,9 @@
 .cartItems {
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
-  padding-right: 8px;
+  overflow-y: auto;
+  transition: max-height ease .3s;
+  padding-right: 15px;
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -101,13 +105,17 @@
 .cartItemWrapper {
   display: grid;
   grid-template-columns: 1fr 180px;
-  align-items: center;
   gap: 20px;
 
   @media (max-width: 570px) {
     grid-template-columns: 30% 1fr;
   }
 }
+
+.cartItemContent{
+  padding-top: 15px;
+}
+
 
 .cartItemImg {
   position: relative;
@@ -161,3 +169,4 @@
   color: var(--primary);
   text-align: right;
 }
+

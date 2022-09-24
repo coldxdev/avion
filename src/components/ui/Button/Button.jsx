@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import s from './Button.module.scss';
-import {ArrowDownIcon} from '../../assets/images/icons';
+import {ArrowDownIcon} from '../../../assets/images/icons';
 import cn from "classnames";
 import {Link} from "react-router-dom";
 

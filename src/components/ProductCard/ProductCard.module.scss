@@ -5,6 +5,7 @@
 
 .product {
   display: flex;
+  height: 100%;
   flex-direction: column;
 }
 
@@ -41,14 +42,57 @@
 
 .name {
   @extend %h4;
-  flex: 1 1 auto;
   margin-bottom: 8px;
+  flex: 1 1 auto;
 }
 
 .price {
   @extend %lgText;
 
-  &:not(:last-child){
+  &:not(:last-child) {
     margin-bottom: 15px;
   }
+}
+
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 100%;
+  gap: 10px;
+
+  @media (max-width: $tablet) {
+    flex-direction: column;
+  }
+
+}
+
+.text {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  width: 100%;
+}
+
+.btn {
+  padding: 0;
+  width: 100%;
+  min-height: 50px;
+  flex-basis: 60px;
+
+  @media (max-width: $tablet) {
+    flex-basis: unset;
+  }
+}
+
+
+.btnIcon {
+  fill: #fff;
+  width: 22px;
+  height: 22px;
+}
+
+.successIcon {
+  fill: #fff;
 }

@@ -11,6 +11,11 @@
 
 .wrapper {
   display: flex;
+  min-height: 584px;
+
+  @media (max-width: $tablet) {
+    min-height: unset;
+  }
 
   @media (max-width: $mobile) {
     margin: 0 -25px;
