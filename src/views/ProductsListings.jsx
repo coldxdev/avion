@@ -9,7 +9,7 @@ import {
     setCheckboxState,
     removeActiveCategory,
     removeActivePrice
-} from "../redux/reducers/productListingsReducer";
+} from "../redux/action-creators/productListingsAC.js";
 import {AMOUNT_PRODUCTS_PRODUCTS_LISTINGS, URL_SEPARATOR} from "../utils/consts";
 import {getProductsByCategories, getProductsByPrices, getURLParams} from "../utils/functions";
 import {useSearchParams} from "react-router-dom";
@@ -17,8 +17,9 @@ import {useSearchParams} from "react-router-dom";
 const ProductsListings = () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.home.products);
+    const {cartItems} = useSelector(state => state.cart);
+    const cartItemsId = cartItems.map(el => el.product_id) || [];
 
-    console.log(products)
     const {currentPage, activeCategories, activePrices, checkboxesState} = useSelector(state => state.productsListings);
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -145,6 +146,7 @@ const ProductsListings = () => {
             hasNextPage={hasNextPage}
             withoutPadding
             withoutContainer
+            cartItemsId={cartItemsId}
         />
     </div>
     );

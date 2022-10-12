@@ -1,5 +1,5 @@
-const INCREMENT_CURRENT_PAGE = "INCREMENT_CURRENT_PAGE";
-const RESET_CURRENT_PAGE = "RESET_CURRENT_PAGE";
+export const INCREMENT_CURRENT_PAGE = "INCREMENT_CURRENT_PAGE";
+export const RESET_CURRENT_PAGE = "RESET_CURRENT_PAGE";
 
 const initialState = {
     currentPage: 1,
@@ -17,9 +17,6 @@ const collectionReducer = (state = initialState, action) => {
     }
 }
 
-
-export const incrementCurrentPage = () => ({type: INCREMENT_CURRENT_PAGE});
-export const resetCurrentPage = () => ({type: RESET_CURRENT_PAGE});
 
 
 export default collectionReducer;

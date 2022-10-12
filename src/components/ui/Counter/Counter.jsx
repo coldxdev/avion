@@ -16,7 +16,11 @@ const Counter = ({qnty, setQnty,}) => {
 
     const onChange = e => {
         const value = +e.target.value;
-        setQnty(value);
+        if (value <= 0) {
+            setQnty(1);
+        } else {
+            setQnty(value);
+        }
     };
 
     return (

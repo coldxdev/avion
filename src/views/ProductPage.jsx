@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useParams} from "react-router-dom";
 import {Benefits, EmailForm, Product, ProductSlider} from "../components";
-import {fetchProduct} from "../redux/reducers/productReducer";
+import {fetchProduct} from "../redux/action-creators/productAC";
 import {useDispatch, useSelector} from "react-redux";
 import {isEmpty} from "../utils/functions";
 
@@ -17,21 +17,23 @@ const ProductPage = () => {
     }, [productID])
 
     return (
-        !isEmpty(product) && <>
+        <>
             <Product
-                imgSrc={product.image.url}
-                name={product.name}
-                price={product.price.formatted_with_symbol}
-                description={product.description}
-                productAttributes={product.attributes}
-                id={product.id}
+                imgSrc={product?.image?.url}
+                name={product?.name}
+                price={product?.price?.formatted_with_symbol}
+                description={product?.description}
+                productAttributes={product?.attributes}
+                id={product?.id}
             />
-            {productRelatedProducts.length &&
+            
+            {productRelatedProducts?.length &&
                 <ProductSlider
                     products={productRelatedProducts}
                     title={'You might also like'}
                 />
             }
+
             <Benefits/>
             <EmailForm/>
         </>

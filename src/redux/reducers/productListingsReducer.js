@@ -1,10 +1,10 @@
-const INCREMENT_CURRENT_PAGE = "INCREMENT_CURRENT_PAGE";
-const RESET_CURRENT_PAGE = "RESET_CURRENT_PAGE";
-const ADD_ACTIVE_CATEGORY = "ADD_ACTIVE_CATEGORY";
-const REMOVE_ACTIVE_CATEGORY = "REMOVE_ACTIVE_CATEGORY";
-const ADD_ACTIVE_PRICE = "ADD_ACTIVE_PRICE";
-const REMOVE_ACTIVE_PRICE = "REMOVE_ACTIVE_PRICE"
-const SET_CHECKBOX_STATE = "SET_CHECKBOX_STATE";
+export const INCREMENT_CURRENT_PAGE = "INCREMENT_CURRENT_PAGE";
+export const RESET_CURRENT_PAGE = "RESET_CURRENT_PAGE";
+export const ADD_ACTIVE_CATEGORY = "ADD_ACTIVE_CATEGORY";
+export const REMOVE_ACTIVE_CATEGORY = "REMOVE_ACTIVE_CATEGORY";
+export const ADD_ACTIVE_PRICE = "ADD_ACTIVE_PRICE";
+export const REMOVE_ACTIVE_PRICE = "REMOVE_ACTIVE_PRICE"
+export const SET_CHECKBOX_STATE = "SET_CHECKBOX_STATE";
 
 const initialState = {
     currentPage: 1,
@@ -92,15 +92,5 @@ const productListingsReducer = (state = initialState, action) => {
 }
 
 
-export const incrementCurrentPage = () => ({type: INCREMENT_CURRENT_PAGE});
-export const resetCurrentPage = () => ({type: RESET_CURRENT_PAGE});
-export const addActiveCategory = (category) => ({type: ADD_ACTIVE_CATEGORY, payload: category});
-export const removeActiveCategory = (category) => ({type: REMOVE_ACTIVE_CATEGORY, payload: category});
-export const addActivePrice = (price) => ({type: ADD_ACTIVE_PRICE, payload: price});
-export const removeActivePrice = (price) => ({type: REMOVE_ACTIVE_PRICE, payload: price});
-export const setCheckboxState = (checkboxName, isChecked) => ({
-    type: SET_CHECKBOX_STATE,
-    payload: {checkboxName, isChecked}
-})
 
 export default productListingsReducer;

@@ -5,15 +5,16 @@ import { Button, Counter } from '../index';
 import { getProductAttributes } from '../../utils/functions';
 import { ATTRIBUTE_DEPTH, ATTRIBUTE_HEIGHT, ATTRIBUTE_IS_BIG, ATTRIBUTE_WIDTH } from '../../utils/consts';
 import cn from 'classnames';
-import { addToCart } from '../../redux/reducers/cartReducer';
+import { addToCart } from '../../redux/action-creators/cartAC';
 
 const requiredAttributes = [ATTRIBUTE_DEPTH, ATTRIBUTE_WIDTH, ATTRIBUTE_HEIGHT, ATTRIBUTE_IS_BIG];
 
 const Product = ({ imgSrc, name, price, description, productAttributes, id }) => {
     const { width, height, depth, is_big } = getProductAttributes(productAttributes, requiredAttributes);
-
+    
+        
     const [quantity, setQuantity] = useState(1);
-
+    
     const onClickBtn = async () => {
         if (quantity < 1) {
             return;

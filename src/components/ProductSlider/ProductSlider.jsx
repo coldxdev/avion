@@ -8,6 +8,7 @@ import { Button, ProductCard } from '../index';
 import { Autoplay } from 'swiper';
 import { ATTRIBUTE_IS_BIG } from '../../utils/consts';
 import { getProductAttributes } from '../../utils/functions';
+import { addToCart } from '../../redux/action-creators/cartAC';
 
 const sliderSettings = {
     modules: [Autoplay],
@@ -18,6 +19,10 @@ const sliderSettings = {
 const ProductSlider = ({ products, title, btnText, href }) => {
     const sliderElems = products.map(p => {
         const isProductBig = getProductAttributes(p.attributes, ATTRIBUTE_IS_BIG);
+        
+        const onAddToCart = () => (
+            addToCart(p.id)
+        )
 
         return (
             <SwiperSlide
@@ -33,6 +38,7 @@ const ProductSlider = ({ products, title, btnText, href }) => {
                     href={p.permalink}
                     isBig={isProductBig === 'true'}
                     key={p.id}
+                    onAdd={onAddToCart}
                 />
             </SwiperSlide>
         );

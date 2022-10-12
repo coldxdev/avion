@@ -62,9 +62,16 @@
 
 .tablePrice {
   flex: 0 0 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  gap: 15px;
 
   @media (max-width: $mobile) {
-    display: none;
+    position: absolute;
+    right: 0;
+    bottom: 0;
   }
 }
 
@@ -96,6 +103,7 @@
   display: flex;
   justify-content: space-between;
   gap: 15px;
+  position: relative;
 
   @media (max-width: 570px) {
     flex-direction: column;
@@ -108,14 +116,9 @@
   gap: 20px;
 
   @media (max-width: 570px) {
-    grid-template-columns: 30% 1fr;
+    grid-template-columns: 35% 1fr;
   }
 }
-
-.cartItemContent{
-  padding-top: 15px;
-}
-
 
 .cartItemImg {
   position: relative;
@@ -136,6 +139,10 @@
 .cartItemName {
   @extend %h4;
   margin-bottom: 8px;
+
+  @media (max-width: 370px) {
+    font-size: 17px;
+  }
 }
 
 .cartItemDesc {
@@ -170,3 +177,33 @@
   text-align: right;
 }
 
+.btnDelete {
+  background-color: var(--borderGrey);
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color ease .3s;
+
+  &:hover {
+    background-color: #e1ddef;
+  }
+
+  @media (max-width: $mobile) {
+    width: 46px;
+    height: 46px;
+  }
+}
+
+.btnDeleteIcon {
+  transition: fill ease .3s;
+  width: 30px;
+  height: 30px;
+}
+
+.cartItemTotalPrice {
+  @media (max-width: $mobile) {
+    display: none;
+  }
+}

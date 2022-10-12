@@ -100,6 +100,27 @@
   }
 }
 
+.cart{
+  position: relative;
+}
+
+.cartCount{
+  position: absolute;
+  top: -5px;
+  line-height: 1;
+  left: 79%;
+  border-radius: 15px;
+  padding: 5px;
+  font-size: 11px;
+  min-width: 20px;
+  min-height: 18px;
+  background-color: var(--darkPrimary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 .categories {
   padding: 20px 15px;

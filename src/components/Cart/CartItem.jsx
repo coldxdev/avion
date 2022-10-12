@@ -1,27 +1,31 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import s from './Cart.module.scss';
-import {Counter} from '../index';
-import {Link} from 'react-router-dom';
-import {debounce, throttle} from '../../utils/functions';
-import {deleteFromCart, updateCart, fetchCartItems} from '../../redux/reducers/cartReducer';
-import {useDispatch} from 'react-redux';
-import {CloseIcon} from "../../assets/images/icons";
+import { Counter } from '../index';
+import { Link } from 'react-router-dom';
+import { debounce } from '../../utils/functions';
+import { deleteFromCart, updateCart, fetchCartItems } from '../../redux/action-creators/cartAC';
+import { useDispatch } from 'react-redux';
+import { CloseIcon } from '../../assets/images/icons';
 
-//TODO: Сделать отдельный лоадер для корзины
-
-const CartItem = ({imgSrc, name, price, setHeight, permalink, quantity, totalPrice, id}) => {
+const CartItem = ({ imgSrc, name, price, setHeight, permalink, quantity, totalPrice, id }) => {
     const [qnty, setQnty] = useState(quantity);
 
     const dispatch = useDispatch();
 
     const cartItemRef = useRef(null);
+    // const cartItemHeight = cartItemRef?.current?.getBoundingClientRect().height;
+    // const cartItemFormattedHeight = +cartItemHeight?.toFixed(2);
 
     const handleToResize = () => {
-        setHeight(cartItemRef?.current?.clientHeight);
+        console.log(+cartItemRef?.current?.getBoundingClientRect().height.toFixed(2));
+        setHeight(+cartItemRef?.current?.getBoundingClientRect().height.toFixed(2));
     };
 
     useEffect(() => {
-        setHeight(cartItemRef.current.clientHeight);
+        setHeight(+cartItemRef?.current?.getBoundingClientRect().height.toFixed(2));
+    }, [ cartItemRef.current]);
+
+    useEffect(() => {
         window.addEventListener('resize', debounce(handleToResize, 200));
 
         return () => {
@@ -36,9 +40,7 @@ const CartItem = ({imgSrc, name, price, setHeight, permalink, quantity, totalPri
             dispatch(deleteFromCart(id));
         }
 
-        setTimeout(() => {
-            dispatch(fetchCartItems());
-        }, 100)
+        dispatch(fetchCartItems());
     };
 
     const debouncedCounterChange = useCallback(debounce(onChangeCounter, 700), []);
@@ -48,12 +50,16 @@ const CartItem = ({imgSrc, name, price, setHeight, permalink, quantity, totalPri
         return setQnty.call(this, value);
     };
 
+    const onBtnDelete = () => {
+        dispatch(deleteFromCart(id));
+    };
+
     return (
         <div className={s.cartItem} ref={cartItemRef}>
             <Link to={'/product/' + permalink} className={s.tableProduct}>
                 <div className={s.cartItemWrapper}>
                     <div className={s.cartItemImg}>
-                        <img src={imgSrc} alt={`Image ${name}`}/>
+                        <img src={imgSrc} alt={`Image ${name}`} />
                     </div>
                     <div className={s.cartItemContent}>
                         <div className={s.cartItemName}>{name}</div>
@@ -62,11 +68,13 @@ const CartItem = ({imgSrc, name, price, setHeight, permalink, quantity, totalPri
                 </div>
             </Link>
             <div className={s.tableQuantity}>
-                <Counter qnty={qnty} setQnty={setQntyContainer}/>
+                <Counter qnty={qnty} setQnty={setQntyContainer} />
             </div>
             <div className={s.tablePrice}>
-                <div className={s.cartItemPrice}>{totalPrice}</div>
-                <button className={s.btnDelete}><CloseIcon/></button>
+                <div className={s.cartItemTotalPrice}>{totalPrice}</div>
+                <button className={s.btnDelete} onClick={onBtnDelete}>
+                    <CloseIcon className={s.btnDeleteIcon} />
+                </button>
             </div>
         </div>
     );

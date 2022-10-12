@@ -6,7 +6,7 @@ import HeaderCategories from "./HeaderCatagories/HeaderCategories";
 import {SearchIcon, CartIcon, UserIcon, MenuIcon, CloseIcon} from "../../assets/images/icons/";
 import {CART_ROUTE, HOME_ROUTE, PRODUCTS_LISTINGS_ROUTE} from "../../utils/consts";
 
-const Header = ({menuActive, setMenuActive}) => {
+const Header = ({menuActive, setMenuActive, cartCount = 0}) => {
 
     // TODO: Переделать мобильное меню
 
@@ -39,6 +39,7 @@ const Header = ({menuActive, setMenuActive}) => {
                         </button>
                         <Link to={CART_ROUTE} className={s.cart}>
                             <CartIcon/>
+                            <span className={s.cartCount}>{cartCount}</span>
                         </Link>
                         <a href="#" className={s.user}>
                             <UserIcon/>

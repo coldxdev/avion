@@ -3,7 +3,8 @@ import s from "./ProductList.module.scss"
 import {Button, ProductCard} from "../index";
 import PropTypes from "prop-types";
 import cn from "classnames";
-import {addToCart} from "../../redux/reducers/cartReducer";
+import {addToCart} from "../../redux/action-creators/cartAC";
+import { useDispatch } from 'react-redux';
 
 //TODO: сделать адекватное отоброжение карточек с большой картинкой
 
@@ -16,14 +17,17 @@ const ProductList = (props) => {
         withoutPadding,
         withoutContainer,
         onClickBtn,
-        hasNextPage = true,
-        href
+        hasNextPage = false,
+        href,
+        cartItemsId,
     } = props;
+
+    const dispatch = useDispatch();
 
     const productElems = products.map((p) => {
 
         const onAddToCart = () => (
-            addToCart(p.id)
+            dispatch(addToCart(p.id))
         )
 
         return (
@@ -34,6 +38,7 @@ const ProductList = (props) => {
                 href={p.permalink}
                 key={p.id}
                 onAdd={onAddToCart}
+                isAdded={cartItemsId.includes(p.id)}
             />
         )
     })

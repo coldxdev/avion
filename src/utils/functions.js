@@ -80,7 +80,7 @@ export function getProductsByPrices(products, prices) {
 }
 
 export function getProductAttributes(productAttributes, queryAttributes) {
-    if (!productAttributes) return;
+    if (!productAttributes) return null;
 
     if (Array.isArray(queryAttributes)) {
         const obj = {};
