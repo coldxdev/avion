@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import s from './Product.module.scss';
 import PropTypes from 'prop-types';
 import { Button, Counter } from '../index';
+import ProductMockupImg from '../../assets/images/product-image-mockup.jpg';
 import { getProductAttributes } from '../../utils/functions';
 import { ATTRIBUTE_DEPTH, ATTRIBUTE_HEIGHT, ATTRIBUTE_IS_BIG, ATTRIBUTE_WIDTH } from '../../utils/consts';
 import cn from 'classnames';
@@ -11,15 +12,14 @@ const requiredAttributes = [ATTRIBUTE_DEPTH, ATTRIBUTE_WIDTH, ATTRIBUTE_HEIGHT, 
 
 const Product = ({ imgSrc, name, price, description, productAttributes, id }) => {
     const { width, height, depth, is_big } = getProductAttributes(productAttributes, requiredAttributes);
-    
-        
+
     const [quantity, setQuantity] = useState(1);
-    
-    const onClickBtn = async () => {
+
+    const onClickBtn = () => {
         if (quantity < 1) {
             return;
         }
-        await addToCart(id, quantity);
+        addToCart(id, quantity);
     };
 
     return (
@@ -30,7 +30,7 @@ const Product = ({ imgSrc, name, price, description, productAttributes, id }) =>
         >
             <div className={`container ${s.wrapper}`}>
                 <div className={s.img}>
-                    <img src={imgSrc} loading={'lazy'} alt={`Image ${name}`} />
+                    <img src={imgSrc ? imgSrc : ProductMockupImg} loading={'lazy'} alt={`Image ${name}`} />
                 </div>
                 <div className={s.content}>
                     <div className={s.top}>

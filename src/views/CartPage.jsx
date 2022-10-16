@@ -12,7 +12,6 @@ const CartPage = () => {
     // TODO: ?? Решить проблему с загрузкой элементов после рендера ??
 
     useEffect(() => {
-        console.log('fetch data');
         dispatch(fetchCartItems());
     }, [])
 

@@ -58,6 +58,7 @@ export const updateCart = (productID, newQnty) => {
         commerce.cart.update(productID, updatedCartQuantity)
             .then((res) => {
                 dispatch(setIsCartLoading(false));
+                dispatch(fetchCartItems());
             })
             .catch(err => toast.error(err));
 

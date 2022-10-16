@@ -17,7 +17,7 @@ const ProductPage = () => {
     }, [productID])
 
     return (
-        <>
+        !isEmpty(product) && <>
             <Product
                 imgSrc={product?.image?.url}
                 name={product?.name}

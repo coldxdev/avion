@@ -13,19 +13,13 @@ const CartItem = ({ imgSrc, name, price, setHeight, permalink, quantity, totalPr
     const dispatch = useDispatch();
 
     const cartItemRef = useRef(null);
-    // const cartItemHeight = cartItemRef?.current?.getBoundingClientRect().height;
-    // const cartItemFormattedHeight = +cartItemHeight?.toFixed(2);
 
     const handleToResize = () => {
-        console.log(+cartItemRef?.current?.getBoundingClientRect().height.toFixed(2));
-        setHeight(+cartItemRef?.current?.getBoundingClientRect().height.toFixed(2));
+        setHeight(cartItemRef.current?.getBoundingClientRect().height);
     };
 
     useEffect(() => {
-        setHeight(+cartItemRef?.current?.getBoundingClientRect().height.toFixed(2));
-    }, [ cartItemRef.current]);
-
-    useEffect(() => {
+        setHeight(cartItemRef.current?.getBoundingClientRect().height);
         window.addEventListener('resize', debounce(handleToResize, 200));
 
         return () => {
@@ -34,13 +28,7 @@ const CartItem = ({ imgSrc, name, price, setHeight, permalink, quantity, totalPr
     }, []);
 
     const onChangeCounter = value => {
-        if (value > 0) {
-            dispatch(updateCart(id, value));
-        } else {
-            dispatch(deleteFromCart(id));
-        }
-
-        dispatch(fetchCartItems());
+        dispatch(updateCart(id, value));
     };
 
     const debouncedCounterChange = useCallback(debounce(onChangeCounter, 700), []);
@@ -52,6 +40,12 @@ const CartItem = ({ imgSrc, name, price, setHeight, permalink, quantity, totalPr
 
     const onBtnDelete = () => {
         dispatch(deleteFromCart(id));
+    };
+
+    const getTotalPrice = (quantity, price) => {
+        const formattedPrice = parseFloat(price.slice(1));
+        const priceSymbol = price.split('')[0];
+        return priceSymbol + quantity * formattedPrice;
     };
 
     return (
@@ -71,7 +65,7 @@ const CartItem = ({ imgSrc, name, price, setHeight, permalink, quantity, totalPr
                 <Counter qnty={qnty} setQnty={setQntyContainer} />
             </div>
             <div className={s.tablePrice}>
-                <div className={s.cartItemTotalPrice}>{totalPrice}</div>
+                <div className={s.cartItemTotalPrice}>{getTotalPrice(qnty, price)}</div>
                 <button className={s.btnDelete} onClick={onBtnDelete}>
                     <CloseIcon className={s.btnDeleteIcon} />
                 </button>

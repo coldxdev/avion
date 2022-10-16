@@ -12,6 +12,9 @@ const Collection = () => {
     const currentPage = useSelector(state => state.collection.currentPage);
     const { categoryID } = useParams();
 
+    const {cartItems} = useSelector(state => state.cart);
+    const cartItemsId = cartItems.map(el => el.product_id) || [];
+
     let filteredProducts = getProductsByCategories(products, categoryID);
 
     const slicedProducts = filteredProducts.slice(0, currentPage * AMOUNT_PRODUCTS_COLLECTION);
@@ -28,6 +31,7 @@ const Collection = () => {
             hasNextPage={hasNextPage}
             onClickBtn={onLoadMore}
             btnText={'Load more'}
+            cartItemsId={cartItemsId}
         />
     );
 };

@@ -1,17 +1,18 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import s from './Cart.module.scss';
 import CartItem from './CartItem';
-import {Button} from '../index';
-import {SPACE_BETWEEN_CART_ITEMS} from '../../utils/consts';
-import {getMaxHeightCartItem} from '../../utils/functions';
+import { Button } from '../index';
+import { SPACE_BETWEEN_CART_ITEMS } from '../../utils/consts';
+import { getMaxHeightCartItem } from '../../utils/functions';
 import PropTypes from 'prop-types';
 import CartLoader from './CartLoader/CartLoader';
 
-
 // TODO: Починить отображение SubTotal после добавления товаров
 
-const Cart = ({cartItems = [], subTotal, isCartLoading}) => {
+const Cart = ({ cartItems = [], subTotal, isCartLoading }) => {
     const [cartItemHeight, setCartItemHeight] = useState(0);
+
+    const formatItemHeight = cartItemHeight ? +cartItemHeight.toFixed(2) : 0;
 
     const cartItemElems = cartItems.map(item => (
         <CartItem
@@ -49,12 +50,11 @@ const Cart = ({cartItems = [], subTotal, isCartLoading}) => {
                                 className={s.cartItems}
                                 style={{
                                     rowGap: SPACE_BETWEEN_CART_ITEMS + 'px',
-                                    maxHeight: getMaxHeightCartItem(cartItemHeight) || 0,
+                                    maxHeight: getMaxHeightCartItem(formatItemHeight) || 0,
                                 }}
                             >
                                 {cartItemElems}
                             </div>
-
                         </div>
                         <div className={s.total}>
                             <div className={s.totalPrice}>
@@ -68,7 +68,7 @@ const Cart = ({cartItems = [], subTotal, isCartLoading}) => {
                     <p>Add anything to cart</p>
                 )}
             </div>
-            <CartLoader visibility={isCartLoading}/>
+            <CartLoader visibility={isCartLoading} />
         </div>
     );
 };
