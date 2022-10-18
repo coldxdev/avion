@@ -9,8 +9,6 @@ const CartPage = () => {
     const {cartTotal, cartItems, isCartLoading} = useSelector(state => state.cart);
     const dispatch = useDispatch();
 
-    // TODO: ?? Решить проблему с загрузкой элементов после рендера ??
-
     useEffect(() => {
         dispatch(fetchCartItems());
     }, [])

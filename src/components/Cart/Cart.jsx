@@ -7,8 +7,6 @@ import { getMaxHeightCartItem } from '../../utils/functions';
 import PropTypes from 'prop-types';
 import CartLoader from './CartLoader/CartLoader';
 
-// TODO: Починить отображение SubTotal после добавления товаров
-
 const Cart = ({ cartItems = [], subTotal, isCartLoading }) => {
     const [cartItemHeight, setCartItemHeight] = useState(0);
 

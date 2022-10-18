@@ -1,42 +1,46 @@
 import React from 'react';
-import s from "./ProductCard.module.scss";
-import PropTypes from "prop-types";
-import cn from "classnames";
-import {Link} from "react-router-dom";
-import ProductMockupImg from "../../assets/images/product-image-mockup.jpg";
-import {Button} from "../index";
-import {CartIcon, SuccessIcon} from "../../assets/images/icons";
+import s from './ProductCard.module.scss';
+import PropTypes from 'prop-types';
+import cn from 'classnames';
+import { Link } from 'react-router-dom';
+import ProductMockupImg from '../../assets/images/product-image-mockup.jpg';
+import { Button } from '../index';
+import { CartIcon, SuccessIcon, LoadingIcon } from '../../assets/images/icons';
 
-// TODO: Сделать внутри кнопки лоадер после добавления в корзину
-// TODO: Проверять находиться ли элемент в корзине и менять иконку в кнопке
+// TODO: [] Сделать внутри кнопки лоадер после добавления в корзину
 
-const ProductCard = ({imgSrc, href, name, price, isBig, onAdd, isAdded = false}) => {
+const ProductCard = ({ imgSrc, href, name, price, isBig, onAdd, isAdded = false, isPending }) => {
+    const buttonСontent = () => {
+        if (isPending) {
+            return <LoadingIcon />;
+        } else if (isAdded && !isPending) {
+            return <SuccessIcon className={s.successIcon} />;
+        } else {
+            return <CartIcon className={s.btnIcon} />;
+        }
+    };
+
     return (
         <article className={s.product}>
             <Link
                 className={cn(s.img, {
-                    [s.big]: isBig
+                    [s.big]: isBig,
                 })}
-                to={`../product/${href}`}>
-                <img src={imgSrc ? imgSrc : ProductMockupImg} alt={`Image ${name}`} loading={'lazy'}/>
+                to={`../product/${href}`}
+            >
+                <img src={imgSrc ? imgSrc : ProductMockupImg} alt={`Image ${name}`} loading={'lazy'} />
             </Link>
 
-
             <div className={s.wrapper}>
-
                 <div className={s.text}>
                     <h5 className={s.name}> {name} </h5>
                     <p className={s.price}> {price} </p>
                 </div>
-
-
+                
                 <Button className={s.btn} type={'primary'} onClick={onAdd}>
-                    {isAdded ? <SuccessIcon className={s.successIcon} /> : <CartIcon className={s.btnIcon}/>}
+                    {buttonСontent()}
                 </Button>
-
             </div>
-
-
         </article>
     );
 };
@@ -47,6 +51,6 @@ ProductCard.propTypes = {
     price: PropTypes.string,
     href: PropTypes.string,
     isBig: PropTypes.bool,
-}
+};
 
 export default ProductCard;

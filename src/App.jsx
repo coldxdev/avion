@@ -2,11 +2,12 @@ import './App.scss';
 import {Bar, Footer, Header, AppRouter, ScrollToTop, Loader} from "./components";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchProducts} from "./redux/action-creators/homeAC";
+import {fetchProducts} from "./redux/action-creators/appAC";
 import {ToastContainer, Zoom} from 'react-toastify';
 import {fetchCartItems} from "./redux/action-creators/cartAC";
 
-//TODO: сделать типизацию PropTypes
+//TODO: [] Cделать типизацию PropTypes
+//TODO: [] Застилизовать react-toastify
 
 function App() {
     const [menuActive, setMenuActive] = useState(false);

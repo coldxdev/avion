@@ -13,10 +13,11 @@ import {
 import {AMOUNT_PRODUCTS_PRODUCTS_LISTINGS, URL_SEPARATOR} from "../utils/consts";
 import {getProductsByCategories, getProductsByPrices, getURLParams} from "../utils/functions";
 import {useSearchParams} from "react-router-dom";
+import { addToCart } from '../redux/action-creators/cartAC';
 
 const ProductsListings = () => {
     const dispatch = useDispatch();
-    const products = useSelector(state => state.home.products);
+    const products = useSelector(state => state.app.products);
     const {cartItems} = useSelector(state => state.cart);
     const cartItemsId = cartItems.map(el => el.product_id) || [];
 
@@ -132,6 +133,12 @@ const ProductsListings = () => {
         dispatch(incrementCurrentPage());
     }
 
+    const onAddToCart = (productID, qnty) => {
+        return () => {
+            dispatch(addToCart(productID, qnty));
+        };
+    };
+
     return (
         <div className="container productListings">
         <ProductsAside
@@ -147,6 +154,7 @@ const ProductsListings = () => {
             withoutPadding
             withoutContainer
             cartItemsId={cartItemsId}
+            onAddToCart={onAddToCart}
         />
     </div>
     );

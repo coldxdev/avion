@@ -6,20 +6,16 @@ import ProductMockupImg from '../../assets/images/product-image-mockup.jpg';
 import { getProductAttributes } from '../../utils/functions';
 import { ATTRIBUTE_DEPTH, ATTRIBUTE_HEIGHT, ATTRIBUTE_IS_BIG, ATTRIBUTE_WIDTH } from '../../utils/consts';
 import cn from 'classnames';
-import { addToCart } from '../../redux/action-creators/cartAC';
-
 const requiredAttributes = [ATTRIBUTE_DEPTH, ATTRIBUTE_WIDTH, ATTRIBUTE_HEIGHT, ATTRIBUTE_IS_BIG];
 
-const Product = ({ imgSrc, name, price, description, productAttributes, id }) => {
+const Product = ({ imgSrc, name, price, description, productAttributes, id, onAddToCart }) => {
     const { width, height, depth, is_big } = getProductAttributes(productAttributes, requiredAttributes);
 
     const [quantity, setQuantity] = useState(1);
 
     const onClickBtn = () => {
-        if (quantity < 1) {
-            return;
-        }
-        addToCart(id, quantity);
+        if (quantity < 1) return;
+        onAddToCart(id, quantity);
     };
 
     return (
@@ -28,7 +24,7 @@ const Product = ({ imgSrc, name, price, description, productAttributes, id }) =>
                 [s.isBig]: is_big === 'true',
             })}
         >
-            <div className={`container ${s.wrapper}`}>
+            <div className={cn('container', s.wrapper)}>
                 <div className={s.img}>
                     <img src={imgSrc ? imgSrc : ProductMockupImg} loading={'lazy'} alt={`Image ${name}`} />
                 </div>
@@ -86,6 +82,7 @@ Product.propTypes = {
     price: PropTypes.string,
     desc: PropTypes.string,
     specs: PropTypes.objectOf(PropTypes.number),
+    onAddToCart: PropTypes.func
 };
 
 export default Product;

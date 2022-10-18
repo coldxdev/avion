@@ -1,41 +1,47 @@
 import React from 'react';
-import {Benefits, ProductList, ProductSlider, TopBanner, EmailForm, Features} from "../components";
-import {useSelector} from "react-redux";
-import {NEW_PRODUCTS_CATEGORY, POPULAR_PRODUCTS_CATEGORY} from "../utils/consts";
-import {getProductsByCategories} from "../utils/functions";
+import { Benefits, ProductList, ProductSlider, TopBanner, EmailForm, Features } from '../components';
+import { useDispatch, useSelector } from 'react-redux';
+import { NEW_PRODUCTS_CATEGORY, POPULAR_PRODUCTS_CATEGORY } from '../utils/consts';
+import { getProductsByCategories } from '../utils/functions';
+import { addToCart } from '../redux/action-creators/cartAC';
+
+//TODO: [] Переделать cartItemsId для обнаружения товаров которые помещены уже в корзину
 
 const Home = () => {
-    const products = useSelector(state => state.home.products);
-    const {cartItems} = useSelector(state => state.cart);
-    const cartItemsId = cartItems.map(el => el.product_id) || [];
+    const products = useSelector(state => state.app.products);
+    const cartItemsId = useSelector(state => state.cart.cartItems).map(i => i.product_id);
+    const dispatch = useDispatch();
 
-    // console.log(cartItemsId)
-
-    //TODO: Переделать cartItemsId для обнаружения товаров которые помещены уже в корзину
-
-    const newProducts = getProductsByCategories(products, NEW_PRODUCTS_CATEGORY, 4)
+    const newProducts = getProductsByCategories(products, NEW_PRODUCTS_CATEGORY, 4);
     const popularProducts = getProductsByCategories(products, POPULAR_PRODUCTS_CATEGORY);
 
+    const onAddToCart = productId => {
+        return () => {
+            dispatch(addToCart(productId));
+        };
+    };
 
     return (
         <React.Fragment>
-            <TopBanner/>
-            <Benefits/>
+            <TopBanner />
+            <Benefits />
             <ProductList
                 title={'New ceramics'}
                 products={newProducts}
                 btnText={'View collection'}
                 href={`/collection/${NEW_PRODUCTS_CATEGORY}`}
                 cartItemsId={cartItemsId}
+                onAddToCart={onAddToCart}
             />
             <ProductSlider
                 title={'Our popular products'}
                 products={popularProducts}
                 btnText={'View collection'}
                 href={`/collection/${POPULAR_PRODUCTS_CATEGORY}`}
+                onAddToCart={onAddToCart}
             />
-            <EmailForm/>
-            <Features/>
+            <EmailForm />
+            <Features />
         </React.Fragment>
     );
 };
