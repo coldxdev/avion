@@ -1,6 +1,4 @@
-export const SET_IS_LOADING = "SET_IS_LOADING";
-export const UPDATE_PRODUCTS = "UPDATE_PRODUCTS"
-export const SET_IS_PRODUCT_PENDING = "SET_IS_PRODUCT_PENDING";
+import { SET_IS_LOADING, SET_IS_PRODUCT_PENDING, UPDATE_PRODUCTS } from '../action-creators/actionTypes'
 
 const initialState = {
     isLoading: false,

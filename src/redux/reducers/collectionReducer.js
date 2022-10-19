@@ -1,6 +1,4 @@
-export const INCREMENT_CURRENT_PAGE = "INCREMENT_CURRENT_PAGE";
-export const RESET_CURRENT_PAGE = "RESET_CURRENT_PAGE";
-export const UPDATE_COLLECTION_DATA = "UPDATE_COLLECTION_DATA";
+import { INCREMENT_CURRENT_PAGE, RESET_CURRENT_PAGE, UPDATE_COLLECTION_DATA } from '../action-creators/actionTypes'
 
 const initialState = {
     currentPage: 1,

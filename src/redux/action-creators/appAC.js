@@ -1,5 +1,5 @@
 import { commerce } from '../../lib/commerce';
-import { SET_IS_LOADING, SET_IS_PRODUCT_PENDING, UPDATE_PRODUCTS } from '../reducers/appReducer';
+import { SET_IS_LOADING, SET_IS_PRODUCT_PENDING, UPDATE_PRODUCTS } from './actionTypes';
 
 export const setIsLoading = (isLoading) => ({type: SET_IS_LOADING, payload: isLoading})
 

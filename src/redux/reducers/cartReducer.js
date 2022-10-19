@@ -1,7 +1,4 @@
-export const UPDATE_CART_ITEMS = "UPDATE_CART_ITEMS";
-export const UPDATE_CART_TOTAL = "UPDATE_CART_TOTAL";
-export const SET_IS_CART_LOADING = "SET_IS_CART_LOADING";
-
+import { SET_IS_CART_LOADING, UPDATE_CART_ITEMS, UPDATE_CART_TOTAL } from '../action-creators/actionTypes'
 
 const initialState = {
     cartTotal: '',

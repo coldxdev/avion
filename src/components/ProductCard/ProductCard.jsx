@@ -7,17 +7,18 @@ import ProductMockupImg from '../../assets/images/product-image-mockup.jpg';
 import { Button } from '../index';
 import { CartIcon, SuccessIcon, LoadingIcon } from '../../assets/images/icons';
 
-// TODO: [] Сделать внутри кнопки лоадер после добавления в корзину
+// TODO: [x] Сделать внутри кнопки лоадер после добавления в корзину
 
-const ProductCard = ({ imgSrc, href, name, price, isBig, onAdd, isAdded = false, isPending }) => {
-    const buttonСontent = () => {
+const ProductCard = ({ imgSrc, href, name, price, onAdd, isBig, isAdded = false, isPending }) => {
+    const getButtonContent = () => {
         if (isPending) {
             return <LoadingIcon />;
-        } else if (isAdded && !isPending) {
-            return <SuccessIcon className={s.successIcon} />;
-        } else {
-            return <CartIcon className={s.btnIcon} />;
         }
+        if (isAdded && !isPending) {
+            return <SuccessIcon className={s.successIcon} />;
+        }
+
+        return <CartIcon className={s.btnIcon} />;
     };
 
     return (
@@ -26,7 +27,7 @@ const ProductCard = ({ imgSrc, href, name, price, isBig, onAdd, isAdded = false,
                 className={cn(s.img, {
                     [s.big]: isBig,
                 })}
-                to={`../product/${href}`}
+                to={`/product/${href}`}
             >
                 <img src={imgSrc ? imgSrc : ProductMockupImg} alt={`Image ${name}`} loading={'lazy'} />
             </Link>
@@ -36,9 +37,9 @@ const ProductCard = ({ imgSrc, href, name, price, isBig, onAdd, isAdded = false,
                     <h5 className={s.name}> {name} </h5>
                     <p className={s.price}> {price} </p>
                 </div>
-                
+
                 <Button className={s.btn} type={'primary'} onClick={onAdd}>
-                    {buttonСontent()}
+                    {getButtonContent()}
                 </Button>
             </div>
         </article>

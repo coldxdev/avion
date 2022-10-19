@@ -1,5 +1,5 @@
 import { commerce } from '../../lib/commerce';
-import { UPDATE_PRODUCT } from '../reducers/productReducer';
+import { UPDATE_PRODUCT } from './actionTypes';
 import { setIsLoading } from './appAC';
 
 export const updateProduct = (product) => ({type: UPDATE_PRODUCT, payload: product})

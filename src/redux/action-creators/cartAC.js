@@ -1,10 +1,6 @@
 import { toast } from 'react-toastify';
 import { commerce } from '../../lib/commerce';
-import {
-    SET_IS_CART_LOADING,
-    UPDATE_CART_ITEMS,
-    UPDATE_CART_TOTAL
-} from '../reducers/cartReducer';
+import { SET_IS_CART_LOADING, UPDATE_CART_ITEMS, UPDATE_CART_TOTAL } from './actionTypes';
 import { setIsProductPending } from './appAC';
 
 export const setIsCartLoading = (isCartLoading) => ({
@@ -60,9 +56,11 @@ export const updateCart = (productID, newQnty) => {
         }
 
         commerce.cart.update(productID, updatedCartQuantity)
-            .then((res) => {
+            .then(({cart}) => {
+                console.log(cart);
+                dispatch(updateCartItems(cart.line_items))
+                dispatch(updateCartTotal(cart.subtotal.formatted_with_symbol))
                 dispatch(setIsCartLoading(false));
-                dispatch(fetchCartItems());
             })
             .catch(err => toast.error(err));
 
@@ -71,21 +69,17 @@ export const updateCart = (productID, newQnty) => {
 
 }
 export const deleteFromCart = (productID) => {
-    //TODO: [] Обновлять SubTotal после удаления продукта с корзины 
+    //TODO: [x] Обновлять SubTotal после удаления продукта с корзины 
      
     
-    return async (dispatch, getStore) => {
+    return async (dispatch) => {
         dispatch(setIsCartLoading(true));
         
-        const {cart} = getStore();
-        
-        const filteredCartItems = cart.cartItems.filter(item => item.id !== productID)
-
         await commerce.cart.remove(productID)
-            .then((res) => {
-                dispatch(updateCartItems(filteredCartItems))
+            .then(({cart}) => {
+                dispatch(updateCartItems(cart.line_items))
+                dispatch(updateCartTotal(cart.subtotal.formatted_with_symbol))
                 dispatch(setIsCartLoading(false));
-                // dispatch(fetchCartItems())
                 toast.success( 'Product removed from cart 👌');
             })
             .catch(err => toast.error(err));
