@@ -4,3 +4,17 @@
 @import "./assets/scss/fonts.scss";
 @import "./assets/scss/common.scss";
 @import 'react-toastify/dist/ReactToastify.css';
+
+
+//* Colors
+:root {
+	--black: #000;
+	--darkPrimary: #2A254B;
+	--white: #ffffff;
+	--black: #000000;
+	--primary: #4E4D93;
+	--lightGrey: #F9F9F9;
+	--borderGrey: #EBE8F4;
+	--borderDark: #CAC6DA;
+	--loader-z-index: 100;
+  }

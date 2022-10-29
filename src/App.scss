@@ -2,9 +2,6 @@
 @import "./assets/scss/vars.scss";
 @import "./assets/scss/common.scss";
 
-// TODO: Убрать лишние импорты стилей
-
-
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -63,4 +60,32 @@
 
 .swiper-slide{
   height: unset !important;
+}
+
+
+.search{
+  padding: 15px 0;
+}
+
+.searchTitle{
+  @extend %h2;
+
+
+  &:not(:last-child){
+    margin-bottom: 15px;
+  }
+}
+
+
+.searchInput{
+  background-color: var(--lightGrey);
+  color: var(--darkPrimary);
+  width: 100%;
+  border: 2px solid var(--darkPrimary);
+  font-size: 18px;
+
+  &::placeholder{
+    color: var(--darkPrimary);
+  }
+  
 }

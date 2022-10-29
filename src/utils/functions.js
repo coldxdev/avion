@@ -1,4 +1,8 @@
-import {MAX_CART_ITEMS_SHOW, SPACE_BETWEEN_CART_ITEMS, URL_SEPARATOR} from "./consts";
+import {
+    MAX_CART_ITEMS_SHOW,
+    SPACE_BETWEEN_CART_ITEMS,
+    URL_SEPARATOR
+} from "./consts";
 
 export function getMaxHeightCartItem(cartItemHeight) {
     return cartItemHeight * MAX_CART_ITEMS_SHOW + (SPACE_BETWEEN_CART_ITEMS * (MAX_CART_ITEMS_SHOW - 1));
@@ -32,9 +36,7 @@ export function isEmpty(obj) {
 }
 
 export function getProductsByCategories(products, categories, limitProducts) {
-    if (categories.length === 0) {
-        return products;
-    }
+    if (!categories || categories.length === 0) return products;
 
     let filteredProducts = products.filter(product => {
         if (product.categories.length > 0) {
@@ -47,11 +49,8 @@ export function getProductsByCategories(products, categories, limitProducts) {
     })
 
     return limitProducts ? filteredProducts.slice(0, limitProducts) : filteredProducts
-
-
 }
 
-//TODO: рефактор функции сортировки по ценам
 export function getProductsByPrices(products, prices) {
     if (!prices || prices.length === 0) {
         return products;
@@ -65,6 +64,7 @@ export function getProductsByPrices(products, prices) {
         const fromPrice = separatedPrice[0].replace('+', "");
         const toPrice = separatedPrice[1] || 'none';
 
+
         if (fromPrice) {
             fromPrices.push(fromPrice);
         }
@@ -75,14 +75,33 @@ export function getProductsByPrices(products, prices) {
 
     })
 
-    return products.filter(product => (toPrices.some(price => product.price.raw <= +price || toPrices.includes('none')) && fromPrices.some(price => product.price.raw >= +price)))
+    return products
+        .filter(product => (
+            toPrices
+            .some(price => product.price.raw <= +price ||
+                toPrices.includes('none')) &&
+            fromPrices
+            .some(price => product.price.raw >= +price)))
 
+}
+
+export function getProductsByName(products, name) {
+    if(!name) {
+        return products;
+    }
+
+    const filteredName = name.trim().toLowerCase();
+
+    return products.filter(product => product.name.toLowerCase().includes(filteredName))
 }
 
 export function getProductAttributes(productAttributes, queryAttributes) {
     if (!productAttributes) return null;
 
-    if (Array.isArray(queryAttributes)) {
+    let isArrayAttributes = Array.isArray(queryAttributes);
+
+
+    if (isArrayAttributes) {
         const obj = {};
         queryAttributes.forEach(attr => {
             const value = productAttributes.find(a => a.name === attr)?.value;
@@ -96,6 +115,7 @@ export function getProductAttributes(productAttributes, queryAttributes) {
         return productAttributes.find(a => a.name === queryAttributes).value;
     }
 }
+
 
 export function getURLParams(URLData, keys) {
     if (!keys.length) return;

@@ -21,7 +21,6 @@ export const fetchCartItems = () => {
     return async dispatch => {
         dispatch(setIsCartLoading(true))
         await commerce.cart.retrieve().then(data => {
-            console.log(data);
             dispatch(updateCartItems(data.line_items))
             dispatch(updateCartTotal(data.subtotal.formatted_with_symbol))
             dispatch(setIsCartLoading(false))
@@ -57,7 +56,6 @@ export const updateCart = (productID, newQnty) => {
 
         commerce.cart.update(productID, updatedCartQuantity)
             .then(({cart}) => {
-                console.log(cart);
                 dispatch(updateCartItems(cart.line_items))
                 dispatch(updateCartTotal(cart.subtotal.formatted_with_symbol))
                 dispatch(setIsCartLoading(false));
@@ -69,9 +67,6 @@ export const updateCart = (productID, newQnty) => {
 
 }
 export const deleteFromCart = (productID) => {
-    //TODO: [x] Обновлять SubTotal после удаления продукта с корзины 
-     
-    
     return async (dispatch) => {
         dispatch(setIsCartLoading(true));
         

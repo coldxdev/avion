@@ -4,6 +4,7 @@ import productListingsReducer from "./productListingsReducer";
 import productReducer from "./productReducer";
 import collectionReducer from "./collectionReducer";
 import cartReducer from "./cartReducer";
+import searchReducer from "./searchReducer";
 
 const reducers = combineReducers({
     app: appReducer,
@@ -11,6 +12,7 @@ const reducers = combineReducers({
     product: productReducer,
     collection: collectionReducer,
     cart: cartReducer,
+    search: searchReducer,
 })
 
 export default reducers;

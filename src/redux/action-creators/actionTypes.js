@@ -27,4 +27,7 @@ export const SET_CHECKBOX_STATE = "SET_CHECKBOX_STATE";
 
 
 // Collection action types
-export const UPDATE_COLLECTION_DATA = "UPDATE_COLLECTION_DATA";
+export const UPDATE_CATEGORIES = "UPDATE_CATEGORIES";
+
+// Search action types
+export const UPDATE_SEARCH_INPUT = "UPDATE_SEARCH_INPUT";

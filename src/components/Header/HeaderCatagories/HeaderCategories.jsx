@@ -1,33 +1,23 @@
 import React from 'react';
-import s from "../Header.module.scss";
+import { Link } from 'react-router-dom';
+import s from '../Header.module.scss';
 
-const HeaderCategories = () => {
+const HeaderCategories = ({ categories }) => {
+    const menuItemElems = categories.map(category => (
+        <li className={s.menuItem} key={category.id}>
+            <Link 
+                className={s.menuLink} 
+                to={`/collection/${category.slug}`}
+            >
+                    {category.name}
+            </Link>
+        </li>
+    ));
+
     return (
         <nav className={s.categories}>
             <div className={`container ${s.categoriesWrapper}`}>
-                <ul className={s.menuList}>
-                    <li className={s.menuItem}>
-                        <a className={s.menuLink} href="#">Plant pots</a>
-                    </li>
-                    <li className={s.menuItem}>
-                        <a className={s.menuLink} href="#">Ceramics</a>
-                    </li>
-                    <li className={s.menuItem}>
-                        <a className={s.menuLink} href="#">Tables</a>
-                    </li>
-                    <li className={s.menuItem}>
-                        <a className={s.menuLink} href="#">Chairs</a>
-                    </li>
-                    <li className={s.menuItem}>
-                        <a className={s.menuLink} href="#">Crockery</a>
-                    </li>
-                    <li className={s.menuItem}>
-                        <a className={s.menuLink} href="#">Tableware</a>
-                    </li>
-                    <li className={s.menuItem}>
-                        <a className={s.menuLink} href="#">Cutlery</a>
-                    </li>
-                </ul>
+                <ul className={s.menuList}>{menuItemElems}</ul>
             </div>
         </nav>
     );

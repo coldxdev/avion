@@ -7,8 +7,6 @@ import ProductMockupImg from '../../assets/images/product-image-mockup.jpg';
 import { Button } from '../index';
 import { CartIcon, SuccessIcon, LoadingIcon } from '../../assets/images/icons';
 
-// TODO: [x] Сделать внутри кнопки лоадер после добавления в корзину
-
 const ProductCard = ({ imgSrc, href, name, price, onAdd, isBig, isAdded = false, isPending }) => {
     const getButtonContent = () => {
         if (isPending) {

@@ -1,26 +1,22 @@
 import {
-    ABOUT_ROUTE,
     CART_ROUTE,
     COLLECTION_ROUTE,
     HOME_ROUTE,
     PRODUCT_ROUTE,
     PRODUCTS_LISTINGS_ROUTE,
+    SEARCH_ROUTE,
 } from "./utils/consts";
-import About from "./views/About";
 import Home from "./views/Home";
 import ProductPage from "./views/ProductPage";
 import CartPage from "./views/CartPage";
 import ProductsListings from "./views/ProductsListings";
 import Collection from "./views/Collection";
+import SearchPage from './views/SearchPage';
 
 export const routes = [
     {
         path: HOME_ROUTE,
         Component: Home,
-    },
-    {
-        path: ABOUT_ROUTE,
-        Component: About,
     },
     {
         path: PRODUCT_ROUTE,
@@ -37,5 +33,9 @@ export const routes = [
     {
         path: COLLECTION_ROUTE,
         Component: Collection,
+    },
+    {
+        path: SEARCH_ROUTE,
+        Component: SearchPage,
     }
 ]

@@ -4,11 +4,9 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import HeaderCategories from './HeaderCatagories/HeaderCategories';
 import { SearchIcon, CartIcon, UserIcon, MenuIcon, CloseIcon } from '../../assets/images/icons/';
-import { ABOUT_ROUTE, CART_ROUTE, HOME_ROUTE, PRODUCTS_LISTINGS_ROUTE } from '../../utils/consts';
+import { CART_ROUTE, HOME_ROUTE, PRODUCTS_LISTINGS_ROUTE, SEARCH_ROUTE } from '../../utils/consts';
 
-const Header = ({ menuActive, setMenuActive, cartCount = 0 }) => {
-    // TODO: Переделать мобильное меню
-    // TODO: Сделать фиксированым хедер после скролла
+const Header = ({ menuActive, setMenuActive, cartCount = 0, categories}) => {
 
     const handleMenuBtn = () => {
         setMenuActive(!menuActive);
@@ -16,17 +14,14 @@ const Header = ({ menuActive, setMenuActive, cartCount = 0 }) => {
 
     return (
         <header>
-            <div className={`container ${s.header}`}>
+            <div className={cn('container', s.header, { [s.menuActive]: menuActive })}>
                 <Link className={s.logo} to={HOME_ROUTE}>
                     Avion
                 </Link>
                 <div className={s.wrapper}>
                     <nav className={s.menu}>
-                        <ul className={cn(s.menuList, s.mobileMenu, { [s.mobileMenuActive]: menuActive })}>
+                        <ul className={cn(s.menuList, s.mobileMenu)}>
                             <li className={s.menuItem}>
-                                <Link className={s.menuLink} to={ABOUT_ROUTE}>
-                                    About us
-                                </Link>
                             </li>
                             <li className={s.menuItem}>
                                 <Link className={s.menuLink} to={PRODUCTS_LISTINGS_ROUTE}>
@@ -41,9 +36,9 @@ const Header = ({ menuActive, setMenuActive, cartCount = 0 }) => {
                         </ul>
                     </nav>
                     <div className={s.actions}>
-                        <button className={s.search}>
+                        <Link to={SEARCH_ROUTE} className={s.search}>
                             <SearchIcon />
-                        </button>
+                        </Link>
                         <Link to={CART_ROUTE} className={s.cart}>
                             <CartIcon />
                             <span className={s.cartCount}>{cartCount}</span>
@@ -57,7 +52,7 @@ const Header = ({ menuActive, setMenuActive, cartCount = 0 }) => {
                     </div>
                 </div>
             </div>
-            <HeaderCategories />
+            <HeaderCategories categories={categories} />
         </header>
     );
 };

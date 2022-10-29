@@ -92,7 +92,7 @@ const Footer = () => {
                         <h5 className={`${s.title} ${s.inputTitle}`}>
                             Join our mailing list
                         </h5>
-                        <TextInput placeholder={'your@email.com'} />
+                        <TextInput btnText={'Sign up'} placeholder={'your@email.com'} />
                     </div>
                 </div>
                 <div className={s.copy}>

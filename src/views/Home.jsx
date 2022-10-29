@@ -38,6 +38,7 @@ const Home = () => {
                 products={popularProducts}
                 btnText={'View collection'}
                 href={`/collection/${POPULAR_PRODUCTS_CATEGORY}`}
+                cartItemsId={cartItemsId}
                 onAddToCart={onAddToCart}
             />
             <EmailForm />

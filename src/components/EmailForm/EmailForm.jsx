@@ -14,7 +14,7 @@ const EmailForm = () => {
                         Sign up for our newsletter and receive exclusive offers on new ranges, sales, pop up stores and
                         more
                     </p>
-                    <TextInput className={s.textInput} type={'light'} placeholder={'your@email.com'}/>
+                    <TextInput className={s.textInput} btnText={'Sign up'}  colorTheme={'light'} placeholder={'your@email.com'}/>
                 </form>
             </div>
         </div>

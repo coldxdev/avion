@@ -7,31 +7,29 @@
   }
 }
 
-.input{
+.input {
   flex: 1 1 auto;
-  min-height: 60px;
+	min-height: 60px;
+	padding: 17px 32px;
   background: rgba(255, 255, 255, 0.15);
-  padding: 17px 32px;
-  color: var(--white);
 
-  &::placeholder{
-    color: var(--white);
-  }
-
-  @media (max-width: 600px) {
-    padding: 17px;
-  }
+	&::placeholder {
+		color: var(--white);
+	}
+  
 }
+
 
 .light{
-  background-color: var(--lightGrey);
-
-  &::placeholder{
-    color: var(--darkPrimary);
-
-    opacity: 0.2;
+	background-color: var(--lightGrey);
+  
+	&::placeholder{
+	  color: var(--darkPrimary);
+  
+	  opacity: 0.2;
+	}
   }
-}
+
 
 .btn{
   @media (max-width: 420px) {
