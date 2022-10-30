@@ -8,13 +8,14 @@ import { fetchCartItems } from './redux/action-creators/cartAC';
 import { fetchCategories } from './redux/action-creators/collectionAC';
 import useScrollBlock from './hooks/useScrollBlock';
 
-// TODO: [] Cделать типизацию PropTypes
-// TODO: [] Застилизовать react-toastify
-// TODO: [] Сделать обработку нескольких вызовов setIsLoading чтобы выполнялся только последний
+// TODO: [ ] Cделать типизацию PropTypes
+// TODO: [ ] Застилизовать react-toastify
+// TODO: [x] Сделать обработку нескольких вызовов setIsLoading чтобы выполнялся только последний
+// TODO: [x] Lazy loading image
 
 function App() {
     const [menuActive, setMenuActive] = useState(false);
-    const { isLoading } = useSelector(state => state.app);
+    const { isLoading } = useSelector(state => state.app.loader);
     const { cartItems } = useSelector(state => state.cart);
     const categories = useSelector(state => state.collection.categories);
     const dispatch = useDispatch();
@@ -22,10 +23,8 @@ function App() {
 
     useEffect(() => {
         dispatch(fetchProducts());
+        dispatch(fetchCartItems());
         dispatch(fetchCategories());
-        setTimeout(() => {
-            dispatch(fetchCartItems());
-        }, 1000);
     }, []);
 
     menuActive ? blockScroll() : allowScroll();

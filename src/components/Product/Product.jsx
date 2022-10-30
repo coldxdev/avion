@@ -6,6 +6,7 @@ import ProductMockupImg from '../../assets/images/product-image-mockup.jpg';
 import { getProductAttributes } from '../../utils/functions';
 import { ATTRIBUTE_DEPTH, ATTRIBUTE_HEIGHT, ATTRIBUTE_IS_BIG, ATTRIBUTE_WIDTH } from '../../utils/consts';
 import cn from 'classnames';
+import LazyLoad from 'react-lazy-load';
 const requiredAttributes = [ATTRIBUTE_DEPTH, ATTRIBUTE_WIDTH, ATTRIBUTE_HEIGHT, ATTRIBUTE_IS_BIG];
 
 const Product = ({ imgSrc, name, price, description, productAttributes, id, onAddToCart }) => {
@@ -25,9 +26,9 @@ const Product = ({ imgSrc, name, price, description, productAttributes, id, onAd
             })}
         >
             <div className={cn('container', s.wrapper)}>
-                <div className={s.img}>
+                <LazyLoad className={s.img} offset={300}>
                     <img src={imgSrc ? imgSrc : ProductMockupImg} loading={'lazy'} alt={`Image ${name}`} />
-                </div>
+                </LazyLoad>
                 <div className={s.content}>
                     <div className={s.top}>
                         <h1 className={s.name}>{name}</h1>

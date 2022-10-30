@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import ProductMockupImg from '../../assets/images/product-image-mockup.jpg';
 import { Button } from '../index';
 import { CartIcon, SuccessIcon, LoadingIcon } from '../../assets/images/icons';
+import LazyLoad from 'react-lazy-load';
 
 const ProductCard = ({ imgSrc, href, name, price, onAdd, isBig, isAdded = false, isPending }) => {
     const getButtonContent = () => {
@@ -27,7 +28,9 @@ const ProductCard = ({ imgSrc, href, name, price, onAdd, isBig, isAdded = false,
                 })}
                 to={`/product/${href}`}
             >
-                <img src={imgSrc ? imgSrc : ProductMockupImg} alt={`Image ${name}`} loading={'lazy'} />
+                <LazyLoad height={375} offset={300}>
+                    <img src={imgSrc ? imgSrc : ProductMockupImg} alt={`Image ${name}`} loading={'lazy'} />
+                </LazyLoad>
             </Link>
 
             <div className={s.wrapper}>

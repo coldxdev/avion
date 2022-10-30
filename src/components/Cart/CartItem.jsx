@@ -45,7 +45,8 @@ const CartItem = ({ imgSrc, name, price, setHeight, permalink, quantity, totalPr
     const getTotalPrice = (quantity, price) => {
         const formattedPrice = parseFloat(price.slice(1));
         const priceSymbol = price.split('')[0];
-        return priceSymbol + quantity * formattedPrice;
+        const totalPrice = (quantity * formattedPrice).toFixed(2);
+        return priceSymbol + totalPrice;
     };
 
     return (

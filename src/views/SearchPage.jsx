@@ -38,7 +38,7 @@ const SearchPage = () => {
 
     return (
         <div className='container search'>
-            {searchInput ? <h2 className='searchTitle'>{filteredProductsByName.length} Results for "{searchInput}"</h2> : null}
+            {searchInput ? <h2 className='searchTitle'>{filteredProductsByName.length} results for "{searchInput}"</h2> : null}
             
             <Input onChange={onSearchInput} inputRef={inputRef} className="searchInput" placeholder={'Search...'} />
             <ProductList

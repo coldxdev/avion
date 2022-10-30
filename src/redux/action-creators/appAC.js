@@ -6,6 +6,7 @@ export const setIsLoading = (isLoading) => ({type: SET_IS_LOADING, payload: isLo
 export const updateProducts = (products) => ({type: UPDATE_PRODUCTS, payload: products})
 
 export const fetchProducts = () => (
+    
     async (dispatch) => {
         dispatch(setIsLoading(true));
         await commerce.products.list().then(({data: products}) => {
@@ -13,7 +14,7 @@ export const fetchProducts = () => (
                 return {...p, isPending: false}
             })
             dispatch(updateProducts(formattedProducts))
-            dispatch(setIsLoading(false));
+            dispatch(setIsLoading(false))
         }).catch((error) => {
             console.log('There was an error fetching the products', error)
         });
