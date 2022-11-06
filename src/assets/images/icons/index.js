@@ -15,3 +15,4 @@ export {default as TwitterIcon} from './Twitter.svg';
 export {default as UserIcon} from './User.svg';
 export {default as MenuIcon} from './Menu.svg';
 export {default as LoadingIcon} from './Loading.svg';
+export {default as BinIcon} from './Bin.svg';

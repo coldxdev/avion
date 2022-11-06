@@ -4,22 +4,23 @@ import { Benefits, EmailForm, Product, ProductSlider } from '../components';
 import { fetchProduct } from '../redux/action-creators/productAC';
 import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty } from '../utils/functions';
-import { addToCart } from '../redux/action-creators/cartAC';
+import { addToCartAC } from '../redux/action-creators/cartAC';
 
 const ProductPage = () => {
     const { productID } = useParams();
+    const dispatch = useDispatch();
 
     const product = useSelector(state => state.product.productData);
     const productRelatedProducts = product.related_products;
-    const dispatch = useDispatch();
+    const { cartItemsId } = useSelector(state => state.cart);
 
     useEffect(() => {
         dispatch(fetchProduct(productID));
     }, [productID]);
 
-    const onAddToCart = (productID, qnty) => {
+    const onAddToCart = (productID, qnty = 1) => {
         return () => {
-            dispatch(addToCart(productID, qnty));
+            dispatch(addToCartAC(productID, qnty));
         };
     };
 
@@ -37,11 +38,12 @@ const ProductPage = () => {
                 />
 
                 {productRelatedProducts?.length && (
-                    <ProductSlider 
-                        products={productRelatedProducts} 
+                    <ProductSlider
+                        products={productRelatedProducts}
                         title={'You might also like'}
                         onAddToCart={onAddToCart}
-                     />
+                        cartItemsId={cartItemsId}
+                    />
                 )}
 
                 <Benefits />

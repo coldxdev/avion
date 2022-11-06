@@ -12,9 +12,17 @@
 }
 
 
+.cartTop{
+  display: flex;
+  justify-content: space-between;
+  column-gap: 15px;
+  margin-bottom: 45px;
+  align-items: center
+}
+
+
 .title {
   @extend %h1;
-  margin-bottom: 45px;
 
   @media (max-width: $mobile) {
     font-size: rem(24);

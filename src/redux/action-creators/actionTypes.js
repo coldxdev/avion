@@ -9,8 +9,7 @@ export const RESET_CURRENT_PAGE = "RESET_CURRENT_PAGE";
 
 
 // Cart action types
-export const UPDATE_CART_ITEMS = "UPDATE_CART_ITEMS";
-export const UPDATE_CART_TOTAL = "UPDATE_CART_TOTAL";
+export const UPDATE_CART_DATA = "UPDATE_CART_DATA"
 export const SET_IS_CART_LOADING = "SET_IS_CART_LOADING";
 
 

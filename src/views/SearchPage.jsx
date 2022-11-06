@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ProductList } from '../components';
 import Input from '../components/ui/Input/Input';
-import { addToCart } from '../redux/action-creators/cartAC';
+import { addToCartAC } from '../redux/action-creators/cartAC';
 import { updateSearchInput } from '../redux/action-creators/searchAC';
 import { AMOUNT_PRODUCTS_COLLECTION } from '../utils/consts';
 import { getProductsByName } from '../utils/functions';
@@ -10,8 +10,7 @@ import { getProductsByName } from '../utils/functions';
 const SearchPage = () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.app.products);
-    const { cartItems } = useSelector(state => state.cart);
-    const cartItemsId = cartItems.map(el => el.product_id) || [];
+    const { cartItemsId} = useSelector(state => state.cart);
     const {currentPage, searchInput} = useSelector(state => state.search);
 
     const inputRef = useRef(null);
@@ -31,7 +30,7 @@ const SearchPage = () => {
 
     const onAddToCart = (productID, qnty) => {
         return () => {
-            dispatch(addToCart(productID, qnty));
+            dispatch(addToCartAC(productID, qnty));
         };
     };
 

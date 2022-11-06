@@ -12,13 +12,12 @@ import { incrementCurrentPage, resetCurrentPage } from '../redux/action-creators
 import { AMOUNT_PRODUCTS_PER_PRODUCTS_LISTINGS, URL_SEPARATOR } from '../utils/consts';
 import { getProductsByCategories, getProductsByPrices, getURLParams } from '../utils/functions';
 import { useSearchParams } from 'react-router-dom';
-import { addToCart } from '../redux/action-creators/cartAC';
+import { addToCartAC } from '../redux/action-creators/cartAC';
 
 const ProductsListings = () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.app.products);
-    const { cartItems } = useSelector(state => state.cart);
-    const cartItemsId = cartItems.map(el => el.product_id) || [];
+    const { cartItemsId } = useSelector(state => state.cart);
 
     const { currentPage, activeCategories, activePrices, checkboxesState } = useSelector(
         state => state.productsListings
@@ -137,7 +136,7 @@ const ProductsListings = () => {
 
     const onAddToCart = (productID, qnty) => {
         return () => {
-            dispatch(addToCart(productID, qnty));
+            dispatch(addToCartAC(productID, qnty));
         };
     };
 

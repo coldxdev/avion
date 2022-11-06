@@ -2,15 +2,25 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import s from './Cart.module.scss';
 import { Counter } from '../index';
 import { Link } from 'react-router-dom';
-import { debounce } from '../../utils/functions';
-import { deleteFromCart, updateCart, fetchCartItems } from '../../redux/action-creators/cartAC';
-import { useDispatch } from 'react-redux';
+import {debounce, formatPriceWithSymbol} from '../../utils/functions';
 import { CloseIcon } from '../../assets/images/icons';
+import PropTypes from "prop-types";
 
-const CartItem = ({ imgSrc, name, price, setHeight, permalink, quantity, totalPrice, id }) => {
+
+const CartItem = props => {
+    const { 
+        imgSrc,
+        name, 
+        price, 
+        setHeight, 
+        permalink, 
+        quantity, 
+        id,
+        deleteFromCart,
+        updateCart,
+        } = props;
+
     const [qnty, setQnty] = useState(quantity);
-
-    const dispatch = useDispatch();
 
     const cartItemRef = useRef(null);
 
@@ -28,7 +38,7 @@ const CartItem = ({ imgSrc, name, price, setHeight, permalink, quantity, totalPr
     }, []);
 
     const onChangeCounter = value => {
-        dispatch(updateCart(id, value));
+        updateCart(id, value)
     };
 
     const debouncedCounterChange = useCallback(debounce(onChangeCounter, 700), []);
@@ -39,13 +49,15 @@ const CartItem = ({ imgSrc, name, price, setHeight, permalink, quantity, totalPr
     };
 
     const onBtnDelete = () => {
-        dispatch(deleteFromCart(id));
+        deleteFromCart(id);
     };
 
-    const getTotalPrice = (quantity, price) => {
-        const formattedPrice = parseFloat(price.slice(1));
-        const priceSymbol = price.split('')[0];
-        const totalPrice = (quantity * formattedPrice).toFixed(2);
+    const {numberFromPrice, priceSymbol} = formatPriceWithSymbol(price);
+
+    const getTotalPrice = () => (quantity * numberFromPrice).toFixed(2)
+
+    const getTotalPriceWithSymbol = () => {
+        const totalPrice = getTotalPrice();
         return priceSymbol + totalPrice;
     };
 
@@ -66,7 +78,7 @@ const CartItem = ({ imgSrc, name, price, setHeight, permalink, quantity, totalPr
                 <Counter qnty={qnty} setQnty={setQntyContainer} />
             </div>
             <div className={s.tablePrice}>
-                <div className={s.cartItemTotalPrice}>{getTotalPrice(qnty, price)}</div>
+                <div className={s.cartItemTotalPrice}>{getTotalPriceWithSymbol()}</div>
                 <button className={s.btnDelete} onClick={onBtnDelete}>
                     <CloseIcon className={s.btnDeleteIcon} />
                 </button>
@@ -74,5 +86,19 @@ const CartItem = ({ imgSrc, name, price, setHeight, permalink, quantity, totalPr
         </div>
     );
 };
+
+CartItem.propTypes = {
+    imgSrc: PropTypes.string,
+    name: PropTypes.string,
+    price: PropTypes.string,
+    setHeight: PropTypes.func,
+    permalink: PropTypes.string,
+    quantity: PropTypes.number,
+    id: PropTypes.string,
+    deleteFromCart: PropTypes.func,
+    updateCart: PropTypes.func,
+}
+
+
 
 export default CartItem;

@@ -116,7 +116,6 @@ export function getProductAttributes(productAttributes, queryAttributes) {
     }
 }
 
-
 export function getURLParams(URLData, keys) {
     if (!keys.length) return;
 
@@ -131,4 +130,14 @@ export function getURLParams(URLData, keys) {
     });
 
     return params;
+}
+
+export function formatPriceWithSymbol (price) {
+    const numberFromPrice = parseFloat(price.slice(1));
+    const priceSymbol = price.split('')[0];
+
+    return {
+        numberFromPrice,
+        priceSymbol,
+    }
 }

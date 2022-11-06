@@ -1,16 +1,34 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import s from './Cart.module.scss';
 import CartItem from './CartItem';
-import { Button } from '../index';
-import { SPACE_BETWEEN_CART_ITEMS } from '../../utils/consts';
-import { getMaxHeightCartItem } from '../../utils/functions';
+import {Button} from '../index';
+import {SPACE_BETWEEN_CART_ITEMS} from '../../utils/consts';
+import {getMaxHeightCartItem} from '../../utils/functions';
 import PropTypes from 'prop-types';
 import CartLoader from './CartLoader/CartLoader';
+import {BinIcon} from '../../assets/images/icons';
+import {useDispatch} from 'react-redux';
+import {deleteFromCartAC, emptyCartAC, updateCartAC} from '../../redux/action-creators/cartAC';
 
-const Cart = ({ cartItems = [], subTotal, isCartLoading }) => {
+const Cart = ({cartItems, subTotal, isCartLoading}) => {
+
+    const dispatch = useDispatch();
+
     const [cartItemHeight, setCartItemHeight] = useState(0);
-
     const formatItemHeight = cartItemHeight ? +cartItemHeight.toFixed(2) : 0;
+
+    const deleteFromCart = (id) => {
+        dispatch(deleteFromCartAC(id));
+    }
+
+    const updateCart = (id, value) => {
+        dispatch(updateCartAC(id, value));
+    }
+
+    const onEmptyBtn = () => {
+        dispatch(emptyCartAC());
+    }
+
 
     const cartItemElems = cartItems.map(item => (
         <CartItem
@@ -20,17 +38,28 @@ const Cart = ({ cartItems = [], subTotal, isCartLoading }) => {
             permalink={item.permalink}
             name={item.name}
             price={item.price.formatted_with_symbol}
-            totalPrice={item.line_total.formatted_with_symbol}
             quantity={item.quantity}
             id={item.id}
+            updateCart={updateCart}
+            deleteFromCart={deleteFromCart}
         />
     ));
+
+
+    const isCartHasItems = () => cartItems.length > 0;
 
     return (
         <div className={s.cart}>
             <div className='container'>
-                <h1 className={s.title}>Your shopping cart {!cartItems.length && 'is empty'}</h1>
-                {cartItems.length > 0 ? (
+                <div className={s.cartTop}>
+                    <h1 className={s.title}>Your shopping cart {!isCartHasItems() && 'is empty'}</h1>
+                    {isCartHasItems() &&
+                        <button onClick={onEmptyBtn}>
+                            <BinIcon/>
+                        </button>
+                    }
+                </div>
+                {isCartHasItems() ? (
                     <div className={s.wrapper}>
                         <div className={s.table}>
                             <div className={s.tableHeader}>
@@ -64,9 +93,10 @@ const Cart = ({ cartItems = [], subTotal, isCartLoading }) => {
                     </div>
                 ) : (
                     <p>Add anything to cart</p>
-                )}
+                )
+                }
             </div>
-            <CartLoader visibility={isCartLoading} />
+            <CartLoader visibility={isCartLoading}/>
         </div>
     );
 };
@@ -74,6 +104,7 @@ const Cart = ({ cartItems = [], subTotal, isCartLoading }) => {
 Cart.propTypes = {
     cartItems: PropTypes.arrayOf(PropTypes.object),
     subTotal: PropTypes.string,
+    isCartLoading: PropTypes.bool,
 };
 
 export default Cart;

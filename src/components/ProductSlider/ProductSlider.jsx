@@ -16,6 +16,9 @@ const sliderSettings = {
 };
 
 const ProductSlider = ({ products, title, btnText, href, onAddToCart, cartItemsId }) => {
+    
+    window.products = products
+    
     const sliderElems = products.map(p => {
         const isProductBig = getProductAttributes(p.attributes, ATTRIBUTE_IS_BIG);
         
@@ -34,7 +37,7 @@ const ProductSlider = ({ products, title, btnText, href, onAddToCart, cartItemsI
                     isBig={isProductBig === 'true'}
                     key={p.id}
                     onAdd={onAddToCart}
-                    // isAdded={cartItemsId.includes(p.id)}
+                    isAdded={cartItemsId.includes(p.id)}
                     isPending={p.isPending}
                 />
             </SwiperSlide>

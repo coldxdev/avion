@@ -5,7 +5,7 @@ import { getProductsByCategories } from '../utils/functions';
 import { useParams } from 'react-router-dom';
 import { incrementCurrentPage } from '../redux/action-creators/appAC';
 import { AMOUNT_PRODUCTS_COLLECTION } from '../utils/consts';
-import { addToCart } from '../redux/action-creators/cartAC';
+import { addToCartAC } from '../redux/action-creators/cartAC';
 
 const Collection = () => {
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const Collection = () => {
     const { currentPage, categories } = useSelector(state => state.collection);
     const currentCategory = categories?.find(c => c.slug === categorySlug);
 
-    const cartItemsId = useSelector(state => state.cart.cartItems).map(el => el.product_id) || [];
+    const { cartItemsId } = useSelector(state => state.cart);
 
     let filteredProducts = getProductsByCategories(products, categorySlug);
     const slicedProducts = filteredProducts.slice(0, currentPage * AMOUNT_PRODUCTS_COLLECTION);
@@ -26,7 +26,7 @@ const Collection = () => {
 
     const onAddToCart = (productID, qnty) => {
         return () => {
-            dispatch(addToCart(productID, qnty));
+            dispatch(addToCartAC(productID, qnty));
         };
     };
 

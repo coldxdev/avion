@@ -4,7 +4,7 @@ import { ToastContainer, Zoom } from 'react-toastify';
 import { Footer, Header, AppRouter, ScrollToTop, Loader } from './components';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from './redux/action-creators/appAC';
-import { fetchCartItems } from './redux/action-creators/cartAC';
+import { fetchCartItemsAC } from './redux/action-creators/cartAC';
 import { fetchCategories } from './redux/action-creators/collectionAC';
 import useScrollBlock from './hooks/useScrollBlock';
 
@@ -15,7 +15,7 @@ import useScrollBlock from './hooks/useScrollBlock';
 
 function App() {
     const [menuActive, setMenuActive] = useState(false);
-    const { isLoading } = useSelector(state => state.app.loader);
+    const { isLoading } = useSelector(state => state.app.loader); 
     const { cartItems } = useSelector(state => state.cart);
     const categories = useSelector(state => state.collection.categories);
     const dispatch = useDispatch();
@@ -23,7 +23,7 @@ function App() {
 
     useEffect(() => {
         dispatch(fetchProducts());
-        dispatch(fetchCartItems());
+        dispatch(fetchCartItemsAC());
         dispatch(fetchCategories());
     }, []);
 

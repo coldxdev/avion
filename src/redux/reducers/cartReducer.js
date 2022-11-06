@@ -1,22 +1,23 @@
-import { SET_IS_CART_LOADING, UPDATE_CART_ITEMS, UPDATE_CART_TOTAL } from '../action-creators/actionTypes'
+import {
+    SET_IS_CART_LOADING,
+    UPDATE_CART_DATA,
+} from '../action-creators/actionTypes'
 
 const initialState = {
     cartTotal: '',
     cartItems: [],
+    cartItemsId: [],
     isCartLoading: false,
 }
 
 const cartReducer = (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_CART_ITEMS:
+        case UPDATE_CART_DATA:
             return {
                 ...state,
-                cartItems: action.payload,
-            }
-        case UPDATE_CART_TOTAL:
-            return {
-                ...state,
-                cartTotal: action.payload,
+                cartItems: action.payload.items,
+                cartTotal: action.payload.total,
+                cartItemsId: action.payload.itemsId,
             }
         case SET_IS_CART_LOADING:
             return {

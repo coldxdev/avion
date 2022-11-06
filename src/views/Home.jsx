@@ -3,13 +3,11 @@ import { Benefits, ProductList, ProductSlider, TopBanner, EmailForm, Features } 
 import { useDispatch, useSelector } from 'react-redux';
 import { NEW_PRODUCTS_CATEGORY, POPULAR_PRODUCTS_CATEGORY } from '../utils/consts';
 import { getProductsByCategories } from '../utils/functions';
-import { addToCart } from '../redux/action-creators/cartAC';
-
-//TODO: [] Переделать cartItemsId для обнаружения товаров которые помещены уже в корзину
+import { addToCartAC } from '../redux/action-creators/cartAC';
 
 const Home = () => {
     const products = useSelector(state => state.app.products);
-    const cartItemsId = useSelector(state => state.cart.cartItems).map(i => i.product_id);
+    const { cartItemsId } = useSelector(state => state.cart);
     const dispatch = useDispatch();
 
     const newProducts = getProductsByCategories(products, NEW_PRODUCTS_CATEGORY, 4);
@@ -17,7 +15,7 @@ const Home = () => {
 
     const onAddToCart = productId => {
         return () => {
-            dispatch(addToCart(productId));
+            dispatch(addToCartAC(productId));
         };
     };
 
