@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { ProductList, ProductsAside } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -9,8 +9,11 @@ import {
     removeActivePrice,
 } from '../redux/action-creators/productListingsAC.js';
 import { incrementCurrentPage, resetCurrentPage } from '../redux/action-creators/appAC';
-import { AMOUNT_PRODUCTS_PER_PRODUCTS_LISTINGS, URL_SEPARATOR } from '../utils/consts';
-import { getProductsByCategories, getProductsByPrices, getURLParams } from '../utils/functions';
+import {
+    AMOUNT_PRODUCTS_PER_PRODUCTS_LISTINGS,
+    URL_SEPARATOR
+} from '../utils/consts';
+import {getProductsByCategories, getProductsByPrices, getURLParams} from '../utils/functions';
 import { useSearchParams } from 'react-router-dom';
 import { addToCartAC } from '../redux/action-creators/cartAC';
 
@@ -40,6 +43,10 @@ const ProductsListings = () => {
                 dispatch(addActivePrice(p));
             }
         });
+
+        return () => {
+            dispatch(resetCurrentPage())
+        }
     }, []);
 
     useEffect(() => {
@@ -62,10 +69,14 @@ const ProductsListings = () => {
     const slicedProducts = filteredProductsByPrice.slice(0, currentPage * AMOUNT_PRODUCTS_PER_PRODUCTS_LISTINGS);
     const hasNextPage = filteredProductsByPrice.length > slicedProducts.length;
 
+
+
     const onChangeCheckbox = e => {
         const checkboxName = e.target.name;
         const checkboxType = e.target.attributes?.filtertype?.value;
 
+
+        //TODO: Refactor this!
         switch (checkboxType) {
             case 'categories':
                 if (e.target.checked) {
@@ -134,15 +145,16 @@ const ProductsListings = () => {
         dispatch(incrementCurrentPage());
     };
 
-    const onAddToCart = (productID, qnty) => {
-        return () => {
-            dispatch(addToCartAC(productID, qnty));
-        };
+    const addToCart = (productID, qnty) => {
+        dispatch(addToCartAC(productID, qnty));
     };
 
     return (
         <div className='container productListings'>
-            <ProductsAside checkboxesState={checkboxesState} onChangeCheckbox={onChangeCheckbox} />
+            <ProductsAside
+                checkboxesState={checkboxesState}
+                onChangeCheckbox={onChangeCheckbox}
+            />
             <ProductList
                 products={slicedProducts}
                 btnText={'Load more'}
@@ -152,7 +164,7 @@ const ProductsListings = () => {
                 withoutPadding
                 withoutContainer
                 cartItemsId={cartItemsId}
-                onAddToCart={onAddToCart}
+                addToCart={addToCart}
             />
         </div>
     );

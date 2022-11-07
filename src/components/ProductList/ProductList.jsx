@@ -1,10 +1,10 @@
 import React from 'react';
 import s from './ProductList.module.scss';
-import { Button, ProductCard } from '../index';
+import {Button, ProductCard} from '../index';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-
-//TODO: [] Cделать адекватное отоброжение карточек с большой картинкой
+import {getProductAttributes} from "../../utils/functions";
+import {ATTRIBUTE_IS_BIG} from "../../utils/consts";
 
 const ProductList = props => {
     const {
@@ -18,23 +18,31 @@ const ProductList = props => {
         hasNextPage = false,
         href,
         cartItemsId,
-        onAddToCart,
+        addToCart,
     } = props;
 
-    const productElems = products.map(p => (
-        <ProductCard
-            imgSrc={p.image?.url}
-            name={p.name}
-            price={p.price.formatted_with_symbol}
-            href={p.permalink}
-            key={p.id}
-            onAdd={onAddToCart(p.id)}
-            isAdded={cartItemsId.includes(p.id)}
-            isPending={p.isPending}
-        />
-    ));
 
-    const buttonProps = href ? { tag: 'link', href } : null;
+    const productElems = products.map(p => {
+            const onAdd = () => {
+                addToCart(p.id)
+            }
+
+            return (
+                <ProductCard
+                    imgSrc={p.image?.url}
+                    name={p.name}
+                    price={p.price.formatted_with_symbol}
+                    href={p.permalink}
+                    key={p.id}
+                    onAdd={onAdd}
+                    isAdded={cartItemsId.includes(p.id)}
+                    isPending={p.isPending}
+                />
+            )
+        }
+    );
+
+    const buttonProps = href ? {tag: 'link', href} : null;
 
     return (
         <div
@@ -42,8 +50,12 @@ const ProductList = props => {
                 [s.withoutPadding]: withoutPadding,
             })}
         >
-            <div className={cn({ container: !withoutContainer })}>
-                {title && <h2 className={s.title}>{title}</h2>}
+            <div className={cn({container: !withoutContainer})}>
+                {title &&
+                    <h2 className={s.title}>
+                        {title}
+                    </h2>
+                }
                 {products.length ? (
                     <React.Fragment>
                         <div
@@ -63,7 +75,7 @@ const ProductList = props => {
                         ) : null}
                     </React.Fragment>
                 ) : (
-                    <p className={s.notFoundText}>Not found products</p>
+                    <p className={s.notFoundText}>Not found products :(</p>
                 )}
             </div>
         </div>
@@ -81,7 +93,8 @@ ProductList.propTypes = {
     hasNextPage: PropTypes.bool,
     onClickBtn: PropTypes.func,
     cartItemsId: PropTypes.arrayOf(PropTypes.string),
-    onAddToCart: PropTypes.func,
+    addToCart: PropTypes.func,
 };
+
 
 export default ProductList;

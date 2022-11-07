@@ -1,6 +1,5 @@
 import React from 'react';
 import s from "./Footer.module.scss";
-import {Button} from "../index";
 import {
     FacebookIcon,
     InstagramIcon,

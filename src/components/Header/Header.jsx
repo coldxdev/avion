@@ -1,28 +1,44 @@
+import {useEffect, useState} from "react";
 import s from './Header.module.scss';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import HeaderCategories from './HeaderCatagories/HeaderCategories';
 import { SearchIcon, CartIcon, UserIcon, MenuIcon, CloseIcon } from '../../assets/images/icons/';
 import { CART_ROUTE, HOME_ROUTE, PRODUCTS_LISTINGS_ROUTE, SEARCH_ROUTE } from '../../utils/consts';
 
-const Header = ({ menuActive, setMenuActive, cartCount = 0, categories}) => {
+const Header = ({ menuActive, setMenuActive, cartCount = 0}) => {
+    const [fixed, setFixed] = useState(false);
+
+    useEffect(() => {
+        window.addEventListener('scroll', isFixed);
+
+        return () => {
+            window.removeEventListener('scroll', isFixed);
+        }
+
+    }, [])
+
+    const isFixed = (e) => {
+        const scrollTop = window.scrollY;
+
+        setFixed(scrollTop > 80);
+    }
 
     const handleMenuBtn = () => {
         setMenuActive(!menuActive);
     };
 
     return (
-        <header>
-            <div className={cn('container', s.header, { [s.menuActive]: menuActive })}>
+        <header className={cn(s.header, {
+            [s.fixed]: fixed
+        })}>
+            <div className={cn('container', s.headerContainer, { [s.menuActive]: menuActive })}>
                 <Link className={s.logo} to={HOME_ROUTE}>
                     Avion
                 </Link>
                 <div className={s.wrapper}>
                     <nav className={s.menu}>
                         <ul className={cn(s.menuList, s.mobileMenu)}>
-                            <li className={s.menuItem}>
-                            </li>
                             <li className={s.menuItem}>
                                 <Link className={s.menuLink} to={PRODUCTS_LISTINGS_ROUTE}>
                                     Products Listings
@@ -52,7 +68,7 @@ const Header = ({ menuActive, setMenuActive, cartCount = 0, categories}) => {
                     </div>
                 </div>
             </div>
-            <HeaderCategories categories={categories} />
+
         </header>
     );
 };
@@ -60,6 +76,7 @@ const Header = ({ menuActive, setMenuActive, cartCount = 0, categories}) => {
 Header.propTypes = {
     menuActive: PropTypes.bool,
     setMenuActive: PropTypes.func,
+    cartCount: PropTypes.number,
 };
 
 export default Header;

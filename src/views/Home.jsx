@@ -13,10 +13,8 @@ const Home = () => {
     const newProducts = getProductsByCategories(products, NEW_PRODUCTS_CATEGORY, 4);
     const popularProducts = getProductsByCategories(products, POPULAR_PRODUCTS_CATEGORY);
 
-    const onAddToCart = productId => {
-        return () => {
-            dispatch(addToCartAC(productId));
-        };
+    const addToCart = (productID, qnty) => {
+        dispatch(addToCartAC(productID, qnty));
     };
 
     return (
@@ -29,7 +27,7 @@ const Home = () => {
                 btnText={'View collection'}
                 href={`/collection/${NEW_PRODUCTS_CATEGORY}`}
                 cartItemsId={cartItemsId}
-                onAddToCart={onAddToCart}
+                addToCart={addToCart}
             />
             <ProductSlider
                 title={'Our popular products'}
@@ -37,7 +35,7 @@ const Home = () => {
                 btnText={'View collection'}
                 href={`/collection/${POPULAR_PRODUCTS_CATEGORY}`}
                 cartItemsId={cartItemsId}
-                onAddToCart={onAddToCart}
+                addToCart={addToCart}
             />
             <EmailForm />
             <Features />

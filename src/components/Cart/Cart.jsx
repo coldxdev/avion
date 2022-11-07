@@ -10,7 +10,7 @@ import {BinIcon} from '../../assets/images/icons';
 import {useDispatch} from 'react-redux';
 import {deleteFromCartAC, emptyCartAC, updateCartAC} from '../../redux/action-creators/cartAC';
 
-const Cart = ({cartItems, subTotal, isCartLoading}) => {
+const Cart = ({cartItems, subtotal, isCartLoading}) => {
 
     const dispatch = useDispatch();
 
@@ -52,7 +52,7 @@ const Cart = ({cartItems, subTotal, isCartLoading}) => {
         <div className={s.cart}>
             <div className='container'>
                 <div className={s.cartTop}>
-                    <h1 className={s.title}>Your shopping cart {!isCartHasItems() && 'is empty'}</h1>
+                    <h1 className={s.title}>Your shopping cart {isCartHasItems() ? null : 'is empty'}</h1>
                     {isCartHasItems() &&
                         <button onClick={onEmptyBtn}>
                             <BinIcon/>
@@ -85,14 +85,14 @@ const Cart = ({cartItems, subTotal, isCartLoading}) => {
                         </div>
                         <div className={s.total}>
                             <div className={s.totalPrice}>
-                                Subtotal <span>{subTotal}</span>
+                                Subtotal <span>{subtotal}</span>
                             </div>
                             <p className={s.totalText}>Taxes and shipping are calculated at checkout</p>
                             <Button type={'primary'}> Go to checkout </Button>
                         </div>
                     </div>
                 ) : (
-                    <p>Add anything to cart</p>
+                    <p>You haven't added anything to cart yet</p>
                 )
                 }
             </div>
@@ -103,7 +103,7 @@ const Cart = ({cartItems, subTotal, isCartLoading}) => {
 
 Cart.propTypes = {
     cartItems: PropTypes.arrayOf(PropTypes.object),
-    subTotal: PropTypes.string,
+    subtotal: PropTypes.string,
     isCartLoading: PropTypes.bool,
 };
 

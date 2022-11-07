@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchCartItemsAC} from "../redux/action-creators/cartAC";
 
 const CartPage = () => {
-    const {cartTotal, cartItems, isCartLoading} = useSelector(state => state.cart);
+    const {subtotal, cartItems, isCartLoading} = useSelector(state => state.cart);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -14,7 +14,7 @@ const CartPage = () => {
     return (
             <Cart
                 cartItems={cartItems}
-                subTotal={cartTotal}
+                subtotal={subtotal}
                 isCartLoading={isCartLoading}
             />
     );

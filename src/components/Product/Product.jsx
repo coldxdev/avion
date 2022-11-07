@@ -3,26 +3,21 @@ import s from './Product.module.scss';
 import PropTypes from 'prop-types';
 import { Button, Counter } from '../index';
 import ProductMockupImg from '../../assets/images/product-image-mockup.jpg';
-import { getProductAttributes } from '../../utils/functions';
-import { ATTRIBUTE_DEPTH, ATTRIBUTE_HEIGHT, ATTRIBUTE_IS_BIG, ATTRIBUTE_WIDTH } from '../../utils/consts';
 import cn from 'classnames';
 import LazyLoad from 'react-lazy-load';
-const requiredAttributes = [ATTRIBUTE_DEPTH, ATTRIBUTE_WIDTH, ATTRIBUTE_HEIGHT, ATTRIBUTE_IS_BIG];
 
-const Product = ({ imgSrc, name, price, description, productAttributes, id, onAddToCart }) => {
-    const { width, height, depth, is_big } = getProductAttributes(productAttributes, requiredAttributes);
-
+const Product = ({ imgSrc, name, price, description, width, height, depth, isBig, id, addToCart }) => {
     const [quantity, setQuantity] = useState(1);
 
     const onClickBtn = () => {
         if (quantity < 1) return;
-        onAddToCart(id, quantity);
+        addToCart(id, quantity);
     };
 
     return (
         <div
             className={cn(s.product, {
-                [s.isBig]: is_big === 'true',
+                [s.isBig]: isBig,
             })}
         >
             <div className={cn('container', s.wrapper)}>
@@ -81,9 +76,13 @@ Product.propTypes = {
     imgSrc: PropTypes.string,
     name: PropTypes.string,
     price: PropTypes.string,
+    width: PropTypes.string,
+    height: PropTypes.string,
+    depth: PropTypes.string,
+    isBig: PropTypes.string,
     desc: PropTypes.string,
     specs: PropTypes.objectOf(PropTypes.number),
-    onAddToCart: PropTypes.func
+    addToCart: PropTypes.func
 };
 
 export default Product;

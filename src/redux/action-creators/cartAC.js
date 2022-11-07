@@ -20,11 +20,11 @@ export const fetchCartItemsAC = () => {
     return async dispatch => {
         dispatch(setIsCartLoading(true))
         await commerce.cart.retrieve().then(cart => {
-            const itemsId = cart.line_items.map(item => item.product_id)
             dispatch(updateCartData({
                 items: cart.line_items,
-                itemsId,
-                total: cart.subtotal.formatted_with_symbol
+                itemsId: cart.line_items.map(item => item.product_id),
+                subtotal: cart.subtotal.formatted_with_symbol,
+                totalCartItems: cart.total_items,
             }))
             dispatch(setIsCartLoading(false))
         }).catch((error) => {
@@ -38,11 +38,11 @@ export const addToCartAC = (productID, qnty = 1) => {
         dispatch(setIsProductPending(productID, true))
         await commerce.cart.add(productID, qnty)
             .then(({cart}) => {
-                const itemsId = cart.line_items.map(item => item.product_id)
                 dispatch(updateCartData({
                     items: cart.line_items,
-                    itemsId,
-                    total: cart.subtotal.formatted_with_symbol
+                    itemsId: cart.line_items.map(item => item.product_id),
+                    subtotal: cart.subtotal.formatted_with_symbol,
+                    totalCartItems: cart.total_items,
                 }))
                 dispatch(setIsProductPending(productID, false))
                 toast.success("Successfully added to cart 👌");
@@ -62,11 +62,11 @@ export const updateCartAC = (productID, newQnty) => {
 
         commerce.cart.update(productID, updatedCartQuantity)
             .then(({cart}) => {
-                const itemsId = cart.line_items.map(item => item.product_id)
                 dispatch(updateCartData({
                     items: cart.line_items,
-                    itemsId,
-                    total: cart.subtotal.formatted_with_symbol
+                    itemsId: cart.line_items.map(item => item.product_id),
+                    subtotal: cart.subtotal.formatted_with_symbol,
+                    totalCartItems: cart.total_items,
                 }))
                 dispatch(setIsCartLoading(false));
             })
@@ -82,11 +82,11 @@ export const deleteFromCartAC = (productID) => {
 
         await commerce.cart.remove(productID)
             .then(({cart}) => {
-                const itemsId = cart.line_items.map(item => item.product_id)
                 dispatch(updateCartData({
                     items: cart.line_items,
-                    itemsId,
-                    total: cart.subtotal.formatted_with_symbol
+                    itemsId: cart.line_items.map(item => item.product_id),
+                    subtotal: cart.subtotal.formatted_with_symbol,
+                    totalCartItems: cart.total_items,
                 }))
                 dispatch(setIsCartLoading(false));
                 toast.success('Product removed from cart 👌');
@@ -101,11 +101,11 @@ export const emptyCartAC = () => {
         dispatch(setIsCartLoading(true));
         commerce.cart.empty()
             .then(({cart}) => {
-                const itemsId = cart.line_items.map(item => item.product_id)
                 dispatch(updateCartData({
                     items: cart.line_items,
-                    itemsId,
-                    total: cart.subtotal.formatted_with_symbol
+                    itemsId: cart.line_items.map(item => item.product_id),
+                    subtotal: cart.subtotal.formatted_with_symbol,
+                    totalCartItems: cart.total_items,
                 }))
                 dispatch(setIsCartLoading(false));
             })

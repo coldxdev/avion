@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import s from './Counter.module.scss';
 import PropTypes from 'prop-types';
 
-const Counter = ({qnty, setQnty,}) => {
+const Counter = ({qnty, setQnty}) => {
     const decrementValue = () => {
         if (qnty <= 1) {
             return;
@@ -39,7 +39,6 @@ const Counter = ({qnty, setQnty,}) => {
 Counter.propTypes = {
     qnty: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     setQnty: PropTypes.func,
-    onChange: PropTypes.func,
 };
 
 export default Counter;

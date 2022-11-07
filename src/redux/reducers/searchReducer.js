@@ -2,7 +2,7 @@ import { INCREMENT_CURRENT_PAGE, RESET_CURRENT_PAGE, UPDATE_SEARCH_INPUT } from 
 
 const initialState = {
     currentPage: 1,
-    seachInput: "",
+    searchInput: "",
 }
 
 const searchReducer = (state = initialState, action) => {

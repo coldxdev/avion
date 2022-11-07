@@ -9,6 +9,18 @@
   flex-direction: column;
 }
 
+.big {
+  grid-column: span 2;
+
+  & .img {
+    padding-bottom: 59.524%;
+
+    @media (max-width: em(600)) {
+      padding-bottom: 123%;
+    }
+  }
+}
+
 .img {
   position: relative;
   height: 0;
@@ -29,14 +41,6 @@
 
   &:hover img {
     transform: scale(1.05);
-  }
-
-  &.big {
-    padding-bottom: 59.524%;
-
-    @media (max-width: em(600)) {
-      padding-bottom: 123%;
-    }
   }
 }
 

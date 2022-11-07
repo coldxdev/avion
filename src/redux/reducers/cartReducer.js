@@ -4,7 +4,8 @@ import {
 } from '../action-creators/actionTypes'
 
 const initialState = {
-    cartTotal: '',
+    subtotal: '',
+    totalCartItems: 0,
     cartItems: [],
     cartItemsId: [],
     isCartLoading: false,
@@ -16,7 +17,8 @@ const cartReducer = (state = initialState, action) => {
             return {
                 ...state,
                 cartItems: action.payload.items,
-                cartTotal: action.payload.total,
+                totalCartItems: action.payload.totalCartItems,
+                subtotal: action.payload.subtotal,
                 cartItemsId: action.payload.itemsId,
             }
         case SET_IS_CART_LOADING:

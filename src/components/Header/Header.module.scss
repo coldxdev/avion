@@ -2,7 +2,26 @@
 @import "../../assets/scss/vars";
 @import "../../assets/scss/common";
 
-.header {
+.header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 10;
+  transition: box-shadow ease .2s;
+}
+
+
+.fixed {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.headerCategories {
+  padding-top: 82px;
+}
+
+.headerContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -11,10 +30,9 @@
   padding: 25px;
   position: relative;
   z-index: 2;
-
 }
 
-.menuActive{
+.menuActive {
   &::before {
     content: "";
     position: absolute;
@@ -34,7 +52,7 @@
     transition: visibility .3s ease-in 0s, opacity ease .3s;
     overflow-y: auto;
   }
-  
+
 }
 
 .logo {
@@ -52,7 +70,8 @@
   gap: 45px;
 }
 
-.menu {}
+.menu {
+}
 
 .menuList {
   display: flex;
@@ -95,6 +114,10 @@
   &:hover {
     border-color: #726E8D;
   }
+}
+
+.menuLinkActive {
+  border-color: #4e4c63;
 }
 
 .actions {

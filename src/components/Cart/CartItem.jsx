@@ -1,39 +1,38 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import s from './Cart.module.scss';
-import { Counter } from '../index';
-import { Link } from 'react-router-dom';
+import {Counter} from '../index';
+import {Link} from 'react-router-dom';
 import {debounce, formatPriceWithSymbol} from '../../utils/functions';
-import { CloseIcon } from '../../assets/images/icons';
+import {CloseIcon} from '../../assets/images/icons';
 import PropTypes from "prop-types";
 
-
 const CartItem = props => {
-    const { 
+    const {
         imgSrc,
-        name, 
-        price, 
-        setHeight, 
-        permalink, 
-        quantity, 
+        name,
+        price,
+        setHeight,
+        permalink,
+        quantity,
         id,
         deleteFromCart,
         updateCart,
-        } = props;
+    } = props;
 
     const [qnty, setQnty] = useState(quantity);
 
     const cartItemRef = useRef(null);
 
-    const handleToResize = () => {
+    const updateHeight = () => {
         setHeight(cartItemRef.current?.getBoundingClientRect().height);
     };
 
     useEffect(() => {
-        setHeight(cartItemRef.current?.getBoundingClientRect().height);
-        window.addEventListener('resize', debounce(handleToResize, 200));
+        updateHeight();
+        window.addEventListener('resize', debounce(updateHeight, 200));
 
         return () => {
-            window.removeEventListener('resize', debounce(handleToResize, 200));
+            window.removeEventListener('resize', debounce(updateHeight, 200));
         };
     }, []);
 
@@ -43,9 +42,10 @@ const CartItem = props => {
 
     const debouncedCounterChange = useCallback(debounce(onChangeCounter, 700), []);
 
+
     const setQntyContainer = value => {
         debouncedCounterChange(value);
-        return setQnty.call(this, value);
+        setQnty(value)
     };
 
     const onBtnDelete = () => {
@@ -55,7 +55,6 @@ const CartItem = props => {
     const {numberFromPrice, priceSymbol} = formatPriceWithSymbol(price);
 
     const getTotalPrice = () => (quantity * numberFromPrice).toFixed(2)
-
     const getTotalPriceWithSymbol = () => {
         const totalPrice = getTotalPrice();
         return priceSymbol + totalPrice;
@@ -66,7 +65,7 @@ const CartItem = props => {
             <Link to={'/product/' + permalink} className={s.tableProduct}>
                 <div className={s.cartItemWrapper}>
                     <div className={s.cartItemImg}>
-                        <img src={imgSrc} alt={`Image ${name}`} />
+                        <img src={imgSrc} alt={`Image ${name}`}/>
                     </div>
                     <div className={s.cartItemContent}>
                         <div className={s.cartItemName}>{name}</div>
@@ -75,12 +74,12 @@ const CartItem = props => {
                 </div>
             </Link>
             <div className={s.tableQuantity}>
-                <Counter qnty={qnty} setQnty={setQntyContainer} />
+                <Counter qnty={qnty} setQnty={setQntyContainer}/>
             </div>
             <div className={s.tablePrice}>
                 <div className={s.cartItemTotalPrice}>{getTotalPriceWithSymbol()}</div>
                 <button className={s.btnDelete} onClick={onBtnDelete}>
-                    <CloseIcon className={s.btnDeleteIcon} />
+                    <CloseIcon className={s.btnDeleteIcon}/>
                 </button>
             </div>
         </div>
@@ -98,7 +97,6 @@ CartItem.propTypes = {
     deleteFromCart: PropTypes.func,
     updateCart: PropTypes.func,
 }
-
 
 
 export default CartItem;

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import s from "./ProductsAside.module.scss";
 import {Button, Checkbox} from "../index";
 import {CloseIcon} from "../../assets/images/icons";
+import PropTypes from "prop-types";
 import cn from "classnames";
 
 const ProductsAside = ({checkboxesState, onChangeCheckbox, ...props}) => {
@@ -146,5 +147,10 @@ const ProductsAside = ({checkboxesState, onChangeCheckbox, ...props}) => {
         </div>
     );
 };
+
+ProductsAside.propTypes = {
+    checkboxesState: PropTypes.arrayOf(PropTypes.object),
+    onChangeCheckbox: PropTypes.func,
+}
 
 export default ProductsAside;

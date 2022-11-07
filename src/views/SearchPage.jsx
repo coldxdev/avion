@@ -1,20 +1,21 @@
-import React, { useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { ProductList } from '../components';
+import React, {useRef} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {ProductList} from '../components';
 import Input from '../components/ui/Input/Input';
-import { addToCartAC } from '../redux/action-creators/cartAC';
-import { updateSearchInput } from '../redux/action-creators/searchAC';
-import { AMOUNT_PRODUCTS_COLLECTION } from '../utils/consts';
-import { getProductsByName } from '../utils/functions';
+import {addToCartAC} from '../redux/action-creators/cartAC';
+import {updateSearchInput} from '../redux/action-creators/searchAC';
+import {AMOUNT_PRODUCTS_COLLECTION} from '../utils/consts';
+import {getProductsByName} from '../utils/functions';
+import {incrementCurrentPage} from "../redux/action-creators/appAC";
 
 const SearchPage = () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.app.products);
-    const { cartItemsId} = useSelector(state => state.cart);
+    const {cartItemsId} = useSelector(state => state.cart);
     const {currentPage, searchInput} = useSelector(state => state.search);
 
     const inputRef = useRef(null);
-    
+
     const filteredProductsByName = getProductsByName(products, searchInput);
     const slicedProducts = filteredProductsByName.slice(0, currentPage * AMOUNT_PRODUCTS_COLLECTION);
     const hasNextPage = filteredProductsByName.length > slicedProducts.length;
@@ -28,27 +29,31 @@ const SearchPage = () => {
         dispatch(incrementCurrentPage());
     };
 
-    const onAddToCart = (productID, qnty) => {
-        return () => {
-            dispatch(addToCartAC(productID, qnty));
-        };
+    const addToCart = (productID, qnty) => {
+        dispatch(addToCartAC(productID, qnty));
     };
 
 
     return (
         <div className='container search'>
-            {searchInput ? <h2 className='searchTitle'>{filteredProductsByName.length} results for "{searchInput}"</h2> : null}
-            
-            <Input onChange={onSearchInput} inputRef={inputRef} className="searchInput" placeholder={'Search...'} />
+            <Input onChange={onSearchInput} inputRef={inputRef} className="searchInput" placeholder={'Search...'}/>
+
+            {searchInput &&
+                <h2 className='searchTitle'>
+                    {filteredProductsByName.length} results for "{searchInput}"
+                </h2>
+            }
+
             <ProductList
                 products={slicedProducts}
                 btnText={'Load more'}
                 itemsPerRow={'4'}
+                withoutContainer
+                withoutPadding
                 onClickBtn={onLoadMore}
                 hasNextPage={hasNextPage}
-                withoutContainer
                 cartItemsId={cartItemsId}
-                onAddToCart={onAddToCart}
+                addToCart={addToCart}
             />
         </div>
     );

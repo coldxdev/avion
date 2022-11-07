@@ -3,45 +3,49 @@ import { useParams } from 'react-router-dom';
 import { Benefits, EmailForm, Product, ProductSlider } from '../components';
 import { fetchProduct } from '../redux/action-creators/productAC';
 import { useDispatch, useSelector } from 'react-redux';
-import { isEmpty } from '../utils/functions';
+import {getProductAttributes, isEmpty} from '../utils/functions';
 import { addToCartAC } from '../redux/action-creators/cartAC';
+import {ATTRIBUTE_DEPTH, ATTRIBUTE_HEIGHT, ATTRIBUTE_IS_BIG, ATTRIBUTE_WIDTH} from "../utils/consts";
 
 const ProductPage = () => {
     const { productID } = useParams();
     const dispatch = useDispatch();
-
     const product = useSelector(state => state.product.productData);
-    const productRelatedProducts = product.related_products;
+    const relatedProducts = product.related_products;
     const { cartItemsId } = useSelector(state => state.cart);
 
     useEffect(() => {
         dispatch(fetchProduct(productID));
     }, [productID]);
 
-    const onAddToCart = (productID, qnty = 1) => {
-        return () => {
-            dispatch(addToCartAC(productID, qnty));
-        };
+    const addToCart = (productID, qnty) => {
+        dispatch(addToCartAC(productID, qnty));
     };
+
+    const requiredAttributes = [ATTRIBUTE_DEPTH, ATTRIBUTE_WIDTH, ATTRIBUTE_HEIGHT, ATTRIBUTE_IS_BIG];
+    const attributes = getProductAttributes(product.attributes, requiredAttributes);
 
     return (
         !isEmpty(product) && (
             <React.Fragment>
                 <Product
-                    imgSrc={product?.image?.url}
-                    name={product?.name}
-                    price={product?.price?.formatted_with_symbol}
+                    imgSrc={product.image.url}
+                    name={product.name}
+                    price={product.price.formatted_with_symbol}
                     description={product?.description}
-                    productAttributes={product?.attributes}
-                    id={product?.id}
-                    onAddToCart={onAddToCart}
+                    width={attributes.width}
+                    height={attributes.height}
+                    depth={attributes.depth}
+                    isBig={attributes.is_big}
+                    id={product.id}
+                    addToCart={addToCart}
                 />
 
-                {productRelatedProducts?.length && (
+                {relatedProducts?.length && (
                     <ProductSlider
-                        products={productRelatedProducts}
+                        products={relatedProducts}
                         title={'You might also like'}
-                        onAddToCart={onAddToCart}
+                        addToCart={addToCart}
                         cartItemsId={cartItemsId}
                     />
                 )}
