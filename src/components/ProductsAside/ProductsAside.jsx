@@ -149,7 +149,7 @@ const ProductsAside = ({checkboxesState, onChangeCheckbox, ...props}) => {
 };
 
 ProductsAside.propTypes = {
-    checkboxesState: PropTypes.arrayOf(PropTypes.object),
+    checkboxesState: PropTypes.object,
     onChangeCheckbox: PropTypes.func,
 }
 

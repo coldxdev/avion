@@ -17,3 +17,4 @@ export {default as Cart} from "./Cart/Cart";
 export {default as ProductsAside} from "./ProductsAside/ProductsAside";
 export {default as Checkbox} from "./ui/Checkbox/Checkbox";
 export {default as Loader} from "./Loader/Loader";
+export {default as HeaderCategories} from "./Header/HeaderCatagories/HeaderCategories";

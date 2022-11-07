@@ -12,15 +12,26 @@
 }
 
 .block {
-
+  position: relative;
+  
   &:not(:last-child) {
     margin-bottom: 50px;
+  }
+
+  @media (max-width: $mobile) {
+    &:not(:last-child) {
+      margin-bottom: 25px;
+    }
   }
 }
 
 .blockTitle {
   @extend %h5;
   margin-bottom: 20px;
+
+  @media (max-width: $mobile) {
+    margin-bottom: 10px
+  }
 }
 
 .checkbox {
@@ -50,19 +61,19 @@
     pointer-events: none;
     transition: opacity ease .3s;
 
-    &::before{
+    &::before {
       content: "";
       left: -25px;
       right: -25px;
       height: 100%;
       background-color: #fff;
       position: absolute;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 20px 17px rgba(0, 0, 0, 0.11);
     }
-    
+
   }
 
-  
+
 }
 
 .visible {

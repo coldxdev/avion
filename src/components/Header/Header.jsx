@@ -28,23 +28,27 @@ const Header = ({ menuActive, setMenuActive, cartCount = 0}) => {
         setMenuActive(!menuActive);
     };
 
+    const onClickMenuLink = () => {
+        setMenuActive(false);
+    }
+
     return (
         <header className={cn(s.header, {
             [s.fixed]: fixed
         })}>
             <div className={cn('container', s.headerContainer, { [s.menuActive]: menuActive })}>
-                <Link className={s.logo} to={HOME_ROUTE}>
+                <Link className={s.logo} to={HOME_ROUTE} onClick={onClickMenuLink}>
                     Avion
                 </Link>
                 <div className={s.wrapper}>
                     <nav className={s.menu}>
                         <ul className={cn(s.menuList, s.mobileMenu)}>
-                            <li className={s.menuItem}>
+                            <li className={s.menuItem} onClick={onClickMenuLink}>
                                 <Link className={s.menuLink} to={PRODUCTS_LISTINGS_ROUTE}>
                                     Products Listings
                                 </Link>
                             </li>
-                            <li className={s.menuItem}>
+                            <li className={s.menuItem} onClick={onClickMenuLink}>
                                 <a className={s.menuLink} href='#'>
                                     Blog
                                 </a>
@@ -52,14 +56,14 @@ const Header = ({ menuActive, setMenuActive, cartCount = 0}) => {
                         </ul>
                     </nav>
                     <div className={s.actions}>
-                        <Link to={SEARCH_ROUTE} className={s.search}>
+                        <Link to={SEARCH_ROUTE} className={s.search} onClick={onClickMenuLink}>
                             <SearchIcon />
                         </Link>
-                        <Link to={CART_ROUTE} className={s.cart}>
+                        <Link to={CART_ROUTE} className={s.cart} onClick={onClickMenuLink}>
                             <CartIcon />
                             <span className={s.cartCount}>{cartCount}</span>
                         </Link>
-                        <a href='#' className={s.user}>
+                        <a href='#' className={s.user} onClick={onClickMenuLink}>
                             <UserIcon />
                         </a>
                         <button onClick={handleMenuBtn} className={s.menuBtn}>

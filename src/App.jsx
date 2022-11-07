@@ -1,21 +1,18 @@
 import './App.scss';
 import {useEffect, useState} from 'react';
 import {ToastContainer, Zoom} from 'react-toastify';
-import {Footer, Header, AppRouter, ScrollToTop, Loader} from './components';
+import {Footer, Header, AppRouter, ScrollToTop, Loader, HeaderCategories} from './components';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchProducts} from './redux/action-creators/appAC';
 import {fetchCartItemsAC} from './redux/action-creators/cartAC';
 import {fetchCategories} from './redux/action-creators/collectionAC';
-import useScrollBlock from './hooks/useScrollBlock';
-import HeaderCategories from "./components/Header/HeaderCatagories/HeaderCategories";
 
 function App() {
+    const dispatch = useDispatch();
     const [menuActive, setMenuActive] = useState(false);
     const {isLoading} = useSelector(state => state.app.loader);
     const {totalCartItems} = useSelector(state => state.cart);
     const categories = useSelector(state => state.collection.categories);
-    const dispatch = useDispatch();
-    const [blockScroll, allowScroll] = useScrollBlock();
 
 
     useEffect(() => {
@@ -23,8 +20,6 @@ function App() {
         dispatch(fetchCartItemsAC());
         dispatch(fetchCategories());
     }, []);
-
-    menuActive ? blockScroll() : allowScroll();
 
     return (
         <div className='wrapper'>
@@ -43,7 +38,7 @@ function App() {
             <ToastContainer
                 transition={Zoom}
                 autoClose={1000}
-                limit={2}
+                limit={1}
                 position={'bottom-left'}
             />
         </div>
