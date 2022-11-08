@@ -1,55 +1,85 @@
-import { ADD_ACTIVE_CATEGORY, ADD_ACTIVE_PRICE, INCREMENT_CURRENT_PAGE, REMOVE_ACTIVE_CATEGORY, REMOVE_ACTIVE_PRICE, RESET_CURRENT_PAGE, SET_CHECKBOX_STATE } from '../action-creators/actionTypes'
+import {
+    ADD_ACTIVE_CATEGORY,
+    ADD_ACTIVE_PRICE,
+    INCREMENT_CURRENT_PAGE,
+    REMOVE_ACTIVE_CATEGORY,
+    REMOVE_ACTIVE_PRICE,
+    RESET_CURRENT_PAGE,
+    SET_CHECKBOX_STATE
+} from '../action-creators/actionTypes'
 
 const initialState = {
     currentPage: 1,
     activeCategories: [],
     activePrices: [],
-    checkboxesState: {
-        "0-100": {
+    checkboxesState: [
+        {
+            title: "0-100",
             checked: false,
+            name: "0-100",
             type: "price",
         },
-        "101-250": {
+        {
+            title: "101-250",
             checked: false,
+            name: "101-250",
             type: "price",
         },
-        "250+": {
+        {
+            title: "250+",
             checked: false,
+            name: "250+",
             type: "price",
         },
-        "furniture": {
+        {
+            title: "Furniture",
             checked: false,
+            name: "furniture",
             type: "category",
         },
-        "homeware": {
+        {
+            title: "Homeware",
             checked: false,
+            name: "homeware",
             type: "category",
         },
-        "sofas": {
+        {
+            title: "Sofas",
             checked: false,
+            name: "sofas",
             type: "category",
         },
-        "light-fittings": {
+        {
+            title: "Light Fittings",
             checked: false,
+            name: "light-fittings",
             type: "category",
         },
-        "robert-smith": {
+        {
+            title: "Robert Smith",
             checked: false,
+            name: "robert-smith",
             type: "category",
         },
-        "liam-gallagher": {
+        {
+            title: "Liam Gallagher",
             checked: false,
+            name: "liam-gallagher",
             type: "category",
         },
-        "biggie-smalls": {
+        {
+            title: "Biggie Smalls",
             checked: false,
+            name: "biggie-smalls",
             type: "category",
         },
-        "thom-yorke": {
+        {
+            title: "Thom Yorke",
             checked: false,
+            name: "thom-yorke",
             type: "category",
         },
-    }
+    ]
 }
 
 const productListingsReducer = (state = initialState, action) => {
@@ -75,16 +105,25 @@ const productListingsReducer = (state = initialState, action) => {
             return {...state, activePrices: filteredActivePrices}
 
         case SET_CHECKBOX_STATE:
-            const checkboxState = {
-                ...state.checkboxesState[action.payload.checkboxName],
-                checked: action.payload.isChecked
-            };
-            return {...state, checkboxesState: {...state.checkboxesState, [action.payload.checkboxName]: checkboxState}}
+            const currentCheckboxIndex = state.checkboxesState.findIndex(checkbox => checkbox.name === action.payload.checkboxName)
+
+            const updatedCheckboxesState = [
+                ...state.checkboxesState.slice(0, currentCheckboxIndex),
+                {
+                    ...state.checkboxesState[currentCheckboxIndex],
+                    checked: action.payload.isChecked
+                },
+                    ...state.checkboxesState.slice(currentCheckboxIndex + 1)
+            ]
+
+
+            return {
+                ...state, checkboxesState: updatedCheckboxesState
+            }
         default:
             return state
     }
 }
-
 
 
 export default productListingsReducer;

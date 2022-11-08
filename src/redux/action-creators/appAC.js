@@ -6,7 +6,6 @@ export const setIsLoading = (isLoading) => ({type: SET_IS_LOADING, payload: isLo
 export const updateProducts = (products) => ({type: UPDATE_PRODUCTS, payload: products})
 
 export const fetchProducts = () => (
-    
     async (dispatch) => {
         dispatch(setIsLoading(true));
         await commerce.products.list().then(({data: products}) => {

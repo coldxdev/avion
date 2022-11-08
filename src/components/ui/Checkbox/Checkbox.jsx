@@ -3,7 +3,7 @@ import s from "./Checkbox.module.scss";
 import PropTypes from "prop-types";
 import cn from "classnames";
 
-const Checkbox = ({className, title, isChecked, onChange, filterType, ...props}) => {
+const Checkbox = ({className, label, isChecked, onChange, filterType, ...props}) => {
 
     return (
         <label className={cn(s.label, {
@@ -16,13 +16,13 @@ const Checkbox = ({className, title, isChecked, onChange, filterType, ...props})
                    filtertype={filterType ? filterType : null}
                    {...props}
             />
-            <span>{title}</span>
+            <span>{label}</span>
         </label>
     );
 };
 
 Checkbox.propTypes = {
-    title: PropTypes.string,
+    label: PropTypes.string,
     isChecked: PropTypes.bool,
     onChange: PropTypes.func,
     filterType: PropTypes.string,

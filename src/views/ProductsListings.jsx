@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { ProductList, ProductsAside } from '../components';
-import { useDispatch, useSelector } from 'react-redux';
+import React, {useEffect} from 'react';
+import {ProductList, ProductsAside} from '../components';
+import {useDispatch, useSelector} from 'react-redux';
 import {
     addActivePrice,
     addActiveCategory,
@@ -8,40 +8,42 @@ import {
     removeActiveCategory,
     removeActivePrice,
 } from '../redux/action-creators/productListingsAC.js';
-import { incrementCurrentPage, resetCurrentPage } from '../redux/action-creators/appAC';
+import {incrementCurrentPage, resetCurrentPage} from '../redux/action-creators/appAC';
 import {
     AMOUNT_PRODUCTS_PER_PRODUCTS_LISTINGS,
     URL_SEPARATOR
 } from '../utils/consts';
 import {getProductsByCategories, getProductsByPrices, getURLParams} from '../utils/functions';
-import { useSearchParams } from 'react-router-dom';
-import { addToCartAC } from '../redux/action-creators/cartAC';
+import {useSearchParams} from 'react-router-dom';
+import {addToCartAC} from '../redux/action-creators/cartAC';
 
 const ProductsListings = () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.app.products);
-    const { cartItemsId } = useSelector(state => state.cart);
+    const {cartItemsId} = useSelector(state => state.cart);
 
-    const { currentPage, activeCategories, activePrices, checkboxesState } = useSelector(
+    const {currentPage, activeCategories, activePrices, checkboxesState} = useSelector(
         state => state.productsListings
     );
     const [searchParams, setSearchParams] = useSearchParams();
 
+    const keysForURLParams = ['categories', 'prices'];
     const URLData = Object.fromEntries(searchParams.entries());
-    const keys = ['categories', 'prices'];
-    const params = getURLParams(URLData, keys);
+    const params = getURLParams(URLData, keysForURLParams);
+
+    const isCheckboxChecked = (checkboxName) => {
+        return checkboxesState.find(checkbox => checkbox.name === checkboxName).checked;
+    }
 
     useEffect(() => {
-        params.categories.forEach(c => {
-            if (!checkboxesState[c]?.checked) {
-                dispatch(addActiveCategory(c));
-            }
+        params.categories.forEach(category => {
+            if (isCheckboxChecked(category)) return;
+            dispatch(addActiveCategory(category));
         });
 
-        params.prices.forEach(p => {
-            if (!checkboxesState[p]?.checked) {
-                dispatch(addActivePrice(p));
-            }
+        params.prices.forEach(price => {
+            if (isCheckboxChecked(price)) return;
+            dispatch(addActivePrice(price));
         });
 
         return () => {
@@ -50,16 +52,14 @@ const ProductsListings = () => {
     }, []);
 
     useEffect(() => {
-        activeCategories.forEach(c => {
-            if (!checkboxesState[c]?.checked) {
-                dispatch(setCheckboxState(c, true));
-            }
+        activeCategories.forEach(activeCheckbox => {
+            if (isCheckboxChecked(activeCheckbox)) return;
+            dispatch(setCheckboxState(activeCheckbox, true));
         });
 
-        activePrices.forEach(p => {
-            if (!checkboxesState[p]?.checked) {
-                dispatch(setCheckboxState(p, true));
-            }
+        activePrices.forEach(activeCheckbox => {
+            if (isCheckboxChecked(activeCheckbox)) return;
+            dispatch(setCheckboxState(activeCheckbox, true));
         });
     }, [activePrices, activeCategories]);
 
@@ -69,77 +69,65 @@ const ProductsListings = () => {
     const slicedProducts = filteredProductsByPrice.slice(0, currentPage * AMOUNT_PRODUCTS_PER_PRODUCTS_LISTINGS);
     const hasNextPage = filteredProductsByPrice.length > slicedProducts.length;
 
+    const getUpdatedActiveCheckboxes = (arrayOfActiveCheckbox, checkboxName) => {
+        return arrayOfActiveCheckbox && arrayOfActiveCheckbox.length > 0
+            ? [...arrayOfActiveCheckbox, checkboxName].join(URL_SEPARATOR)
+            : checkboxName
+    }
 
+    const getFilteredActiveCheckboxes = (arrayOfActiveCheckbox, checkboxName) => {
+        const filteredActiveCheckboxes = arrayOfActiveCheckbox.length === 1
+            ? []
+            : arrayOfActiveCheckbox
+                .filter(activeCheckbox => activeCheckbox !== checkboxName)
+                .join(URL_SEPARATOR)
+
+        return filteredActiveCheckboxes;
+    }
+
+    const addActiveCheckboxToURL = (checkboxName, type) => {
+        if (type === "category") {
+            dispatch(addActiveCategory(checkboxName));
+            const updatedActiveCategories = getUpdatedActiveCheckboxes(params.categories, checkboxName)
+            setSearchParams({...URLData, categories: updatedActiveCategories});
+        }
+
+        if (type === "price") {
+            dispatch(addActivePrice(checkboxName));
+            const updatedActivePrices = getUpdatedActiveCheckboxes(params.prices, checkboxName)
+            setSearchParams({...URLData, prices: updatedActivePrices});
+        }
+
+    }
+
+    const removeCheckboxFromURL = (checkboxName, type) => {
+        if (type === "category") {
+            dispatch(removeActiveCategory(checkboxName));
+            const filteredActiveCategories = getFilteredActiveCheckboxes(params.categories, checkboxName);
+            setSearchParams({...URLData, categories: filteredActiveCategories})
+        }
+
+        if (type === "price") {
+            dispatch(removeActivePrice(checkboxName));
+            const filteredActivePrices = getFilteredActiveCheckboxes(params.prices, checkboxName);
+            setSearchParams({...URLData, prices: filteredActivePrices})
+        }
+    }
 
     const onChangeCheckbox = e => {
         const checkboxName = e.target.name;
         const checkboxType = e.target.attributes?.filtertype?.value;
 
-
-        //TODO: Refactor this!
-        switch (checkboxType) {
-            case 'categories':
-                if (e.target.checked) {
-                    dispatch(addActiveCategory(checkboxName));
-                    let newCategories;
-                    if (URLData.categories && URLData.categories.length > 0) {
-                        const newArr = URLData.categories.split(URL_SEPARATOR);
-                        newArr.push(checkboxName);
-                        newCategories = newArr.join(URL_SEPARATOR);
-                    } else {
-                        newCategories = checkboxName;
-                    }
-                    setSearchParams({ ...URLData, categories: newCategories });
-                } else {
-                    dispatch(removeActiveCategory(checkboxName));
-                    if (URLData.categories.split(URL_SEPARATOR).length === 1) {
-                        delete URLData.categories;
-                        setSearchParams(URLData);
-                    } else {
-                        setSearchParams({
-                            ...URLData,
-                            categories: URLData.categories
-                                .split(URL_SEPARATOR)
-                                .filter(c => c !== checkboxName)
-                                .join(URL_SEPARATOR),
-                        });
-                    }
-                }
-                break;
-
-            case 'prices':
-                if (e.target.checked) {
-                    dispatch(addActivePrice(checkboxName));
-                    let newPrices;
-                    if (URLData.prices && URLData.prices.length > 0) {
-                        const newArr = URLData.prices.split(URL_SEPARATOR);
-                        newArr.push(checkboxName);
-                        newPrices = newArr.join(URL_SEPARATOR);
-                    } else {
-                        newPrices = checkboxName;
-                    }
-                    setSearchParams({ ...URLData, prices: newPrices });
-                } else {
-                    dispatch(removeActivePrice(checkboxName));
-                    if (URLData.prices.split(URL_SEPARATOR).length === 1) {
-                        delete URLData.prices;
-                        setSearchParams(URLData);
-                    } else {
-                        setSearchParams({
-                            ...URLData,
-                            prices: URLData.prices
-                                .split(URL_SEPARATOR)
-                                .filter(p => p !== checkboxName)
-                                .join(URL_SEPARATOR),
-                        });
-                    }
-                }
-                break;
+        if (e.target.checked) {
+            addActiveCheckboxToURL(checkboxName, checkboxType)
+        } else {
+            removeCheckboxFromURL(checkboxName, checkboxType)
         }
 
         dispatch(setCheckboxState(checkboxName, e.target.checked));
         dispatch(resetCurrentPage());
     };
+
 
     const onLoadMore = () => {
         dispatch(incrementCurrentPage());

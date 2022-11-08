@@ -8,6 +8,23 @@ import cn from "classnames";
 const ProductsAside = ({checkboxesState, onChangeCheckbox, ...props}) => {
     const [filtersVisibility, setFiltersVisibility] = useState(false);
 
+
+    const getCheckboxElemsByType = (checkboxType) => (
+        checkboxesState
+            .filter(checkbox => checkbox.type === checkboxType)
+            .map(checkbox => (
+                <Checkbox
+                    className={s.checkbox}
+                    label={checkbox.title}
+                    isChecked={checkbox.checked}
+                    name={checkbox.name}
+                    onChange={onChangeCheckbox}
+                    filterType={checkbox.type}
+                    key={checkbox.name}
+                />
+            ))
+    )
+
     const onMobileBtnClick = () => {
         setFiltersVisibility(true);
     }
@@ -36,41 +53,10 @@ const ProductsAside = ({checkboxesState, onChangeCheckbox, ...props}) => {
                 </button>
                 <div className={s.block}>
                     <h5 className={s.blockTitle}>
-                        Product type
+                        Categories
                     </h5>
 
-                    <Checkbox
-                        className={s.checkbox}
-                        title={"Furniture"}
-                        isChecked={checkboxesState["furniture"].checked}
-                        name={'furniture'}
-                        onChange={onChangeCheckbox}
-                        filterType={'categories'}
-                    />
-                    <Checkbox
-                        className={s.checkbox}
-                        title={"Homeware"}
-                        name={'homeware'}
-                        onChange={onChangeCheckbox}
-                        isChecked={checkboxesState["homeware"].checked}
-                        filterType={'categories'}
-                    />
-                    <Checkbox
-                        className={s.checkbox}
-                        title={"Sofas"}
-                        name={'sofas'}
-                        onChange={onChangeCheckbox}
-                        isChecked={checkboxesState["sofas"].checked}
-                        filterType={'categories'}
-                    />
-                    <Checkbox
-                        className={s.checkbox}
-                        title={"Light fittings"}
-                        onChange={onChangeCheckbox}
-                        name={'light-fittings'}
-                        isChecked={checkboxesState["light-fittings"].checked}
-                        filterType={'categories'}
-                    />
+                    {getCheckboxElemsByType('category')}
 
                 </div>
                 <div className={s.block}>
@@ -78,70 +64,7 @@ const ProductsAside = ({checkboxesState, onChangeCheckbox, ...props}) => {
                         Price
                     </h5>
 
-                    <Checkbox
-                        className={s.checkbox}
-                        title={"0-100"}
-                        name={"0-100"}
-                        isChecked={checkboxesState["0-100"].checked}
-                        onChange={onChangeCheckbox}
-                        filterType={'prices'}
-                    />
-
-                    <Checkbox
-                        className={s.checkbox}
-                        title={"101 - 250"}
-                        name={"101-250"}
-                        isChecked={checkboxesState["101-250"].checked}
-                        onChange={onChangeCheckbox}
-                        filterType={'prices'}
-                    />
-                    <Checkbox
-                        className={s.checkbox}
-                        title={"250+"}
-                        name={"250+"}
-                        isChecked={checkboxesState["250+"].checked}
-                        onChange={onChangeCheckbox}
-                        filterType={'prices'}
-                    />
-
-                </div>
-                <div className={s.block}>
-                    <h5 className={s.blockTitle}>
-                        Designer
-                    </h5>
-
-                    <Checkbox
-                        className={s.checkbox}
-                        title={"Robert Smith"}
-                        name={"robert-smith"}
-                        isChecked={checkboxesState["robert-smith"].checked}
-                        onChange={onChangeCheckbox}
-                        filterType={'categories'}
-                    />
-                    <Checkbox
-                        className={s.checkbox}
-                        title={"Liam Gallagher"}
-                        name={"liam-gallagher"}
-                        isChecked={checkboxesState["liam-gallagher"].checked}
-                        onChange={onChangeCheckbox}
-                        filterType={'categories'}
-                    />
-                    <Checkbox
-                        className={s.checkbox}
-                        title={"Biggie Smalls"}
-                        name={"biggie-smalls"}
-                        isChecked={checkboxesState["biggie-smalls"].checked}
-                        onChange={onChangeCheckbox}
-                        filterType={'categories'}
-                    />
-                    <Checkbox
-                        className={s.checkbox}
-                        title={"Thom Yorke"}
-                        name={"thom-yorke"}
-                        isChecked={checkboxesState["thom-yorke"].checked}
-                        onChange={onChangeCheckbox}
-                        filterType={'categories'}
-                    />
+                    {getCheckboxElemsByType('price')}
                 </div>
             </div>
         </div>
@@ -149,7 +72,7 @@ const ProductsAside = ({checkboxesState, onChangeCheckbox, ...props}) => {
 };
 
 ProductsAside.propTypes = {
-    checkboxesState: PropTypes.object,
+    checkboxesState: PropTypes.array,
     onChangeCheckbox: PropTypes.func,
 }
 
